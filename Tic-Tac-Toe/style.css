@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+
+html{
+    margin: 0;
+    padding: 0;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    /* border: 1px black solid; */
+}
+
+main {
+    display: flex;
+    /* grid-gap: 1em; */
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 40%;
+    border: 3px orange solid;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    padding 1px;
+    text-align: center;
+    background-color: grey;
+    border-right: 3px black solid;
+    border-bottom: 3px black solid;
+}
+
+.boxes-right {
+    border-right: none;
+}
+
+.boxes-bottom {
+    border-bottom: none;
+}
+
+/* @media (max-width: 800px {
+    main{
+        flex-wrap: nowrap;
+
+    }
+    
+} */
