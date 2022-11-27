@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-html{
+body{
     margin: 0;
     padding: 0;
 }
@@ -14,17 +14,17 @@ html{
 }
 
 main {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
     /* grid-gap: 1em; */
-    flex-wrap: wrap;
     justify-content: center;
-    width: 40%;
-    border: 3px orange solid;
+    align-items: center;
+    /* border: 3px orange solid; */
 }
 
 .score-box {
     display: flex;
-    border: 2px black solid; /*delete later*/
+    justify-content: center;
 }
 
 .box {
@@ -33,19 +33,22 @@ main {
     height: 100px;
     align-items: center;
     justify-content: center;
-    background-color: grey;
-    border-right: 3px black solid;
-    border-bottom: 3px black solid;
-    /* vertical-align: middle; */
+    /* background-color: grey; */
+    border: 1px black solid;
+   
+   
 }
 
-.boxes-right {
-    border-right: none;
+.players-box {
+    display: flex;
+    justify-content: center;
 }
 
-.boxes-bottom {
-    border-bottom: none;
+.current-player {
+    display: flex;
+    justify-content: center;
 }
+
 
 /* @media (max-width: 800px {
     main{
