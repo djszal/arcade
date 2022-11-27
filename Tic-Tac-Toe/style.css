@@ -7,7 +7,7 @@ html{
     padding: 0;
 }
 
-#title {
+.title {
     display: flex;
     justify-content: center;
     /* border: 1px black solid; */
@@ -22,11 +22,15 @@ main {
     border: 3px orange solid;
 }
 
+.score-box {
+    display: flex;
+    border: 2px black solid; /*delete later*/
+}
+
 .box {
     display: flex;
     width: 100px;
     height: 100px;
-    padding 1px;
     align-items: center;
     justify-content: center;
     background-color: grey;
