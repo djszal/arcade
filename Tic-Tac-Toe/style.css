@@ -10,16 +10,14 @@ body{
 .title {
     display: flex;
     justify-content: center;
-    /* border: 1px black solid; */
 }
 
 main {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    /* grid-gap: 1em; */
     justify-content: center;
     align-items: center;
-    /* border: 3px orange solid; */
+    margin-bottom: 10px;
 }
 
 .score-box {
@@ -33,15 +31,15 @@ main {
     height: 100px;
     align-items: center;
     justify-content: center;
-    /* background-color: grey; */
-    border: 1px black solid;
-   
-   
+    border: 5px black solid;
+    font-size: 75px;
+    font-weight: bold;
 }
 
 .players-box {
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .current-player {
@@ -49,11 +47,25 @@ main {
     justify-content: center;
 }
 
+.box:nth-child(3n) {
+    border-right: none;
+    border-left: none;
+}
 
-/* @media (max-width: 800px {
-    main{
-        flex-wrap: nowrap;
+.box:nth-child(n+7) {
+    border-bottom: none;
+}
 
-    }
-    
-} */
+.box:nth-child(n-3) {
+    border-top: none;
+}
+
+.box:nth-child(3n+4) {
+    border-left: none;
+    border-right: none;
+}
+
+.box:first-child {
+    border-left: none;
+    border-right: none;
+}
