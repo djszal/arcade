@@ -5,9 +5,10 @@ let state = {};
 function buildInitialState() {
     state.board = [null, null, null, null, null, null, null, null, null];
     state.players = [null, null];
+}
+function dynamicState(){
     state.score = [0,0];
 }
-
 //********************** DOM Selectors *****************************
 
 const boardElem = document.querySelector('.board'); 
@@ -18,6 +19,9 @@ const scoreBoxElem = document.querySelector('.score-box');
 //********************** Render DOM Initial State *****************************
 let count = 0;
 
+const winningArray1 = [[0, 1, 2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+
+
 function renderBoard() {
     boardElem.innerText = '';
     for(let i=0; i < state.board.length; i++) {
@@ -27,9 +31,6 @@ function renderBoard() {
     }
 }
 
-function scoreBox() {
-     scoreBoxElem.innerText = ('Score');
-}
 
 function renderPlayers() {
     let text = null;
@@ -44,6 +45,10 @@ function renderPlayers() {
     playersBoxElem.innerHTML = text;
 }
 
+function scoreBox() {
+     scoreBoxElem.innerText = ('Score');
+}
+
 function renderScoreNames() {
     for(let i=0; i < state.players.length; i++){
         const plyrName = state.players[i];
@@ -53,21 +58,74 @@ function renderScoreNames() {
         plyrNameScore.innerText = (plyrName + ': ' + score); 
         scoreBoxElem.appendChild(plyrNameScore); 
     }
-     // Didn't get a chance to work on rendering the score since I wasn't able to get the winning conditions to work. I would have ran a function that referenced state.score and displayed the values during every round. 
 }
 
 function restartButton() {
     let reset = null;
         reset = `<input type="button" class="reset" value="Reset"/>`
         const resetButton = document.createElement('div'); 
-        playersBoxElem.appendChild(resetButton); 
+        playersBoxElem.append(resetButton); 
         resetButton.innerHTML = reset;
+}
+
+function placeMarks (event) {
+    if (event.target.innerText === "" && state.players[0] !== null){
+        if (count % 2 === 0){
+        event.target.innerText = "X";
+        }
+        else{
+        event.target.innerText = "O";
+        }
+        count++
+}
+}
+
+function winner() {
+        if (state.board[0]==="X" && state.board[1]==="X" && state.board[2]==="X") {
+           playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+           boardElem.removeEventListener('click', (event) => {
+            placeMarks(event);
+           })
+        }else if (state.board[3]==="X" && state.board[4]==="X" && state.board[5]==="X"){
+            playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        }else if (state.board[6]==="X" && state.board[7]==="X" && state.board[8]==="X"){
+            playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        }else if (state.board[0]==="X" && state.board[3]==="X" && state.board[6]==="X"){
+                playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        }else if (state.board[1]==="X" && state.board[4]==="X" && state.board[7]==="X"){
+                playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        }else if (state.board[2]==="X" && state.board[5]==="X" && state.board[8]==="X"){
+                playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        }else if (state.board[0]==="X" && state.board[4]==="X" && state.board[8]==="X"){
+                playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        }else if (state.board[2]==="X" && state.board[4]==="X" && state.board[6]==="X"){
+                playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        }else if (state.board[0]==="O" && state.board[1]==="O" && state.board[2]==="O") {
+            playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        }else if (state.board[3]==="O" && state.board[4]==="O" && state.board[5]==="O"){
+            playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        }else if (state.board[6]==="O" && state.board[7]==="O" && state.board[8]==="O"){
+            playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        }else if (state.board[0]==="O" && state.board[3]==="O" && state.board[6]==="O"){
+                playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        }else if (state.board[1]==="O" && state.board[4]==="O" && state.board[7]==="O"){
+                playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        }else if (state.board[2]==="O" && state.board[5]==="O" && state.board[8]==="O"){
+                playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        }else if (state.board[0]==="O" && state.board[4]==="O" && state.board[8]==="O"){
+                playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        }else if (state.board[2]==="O" && state.board[4]==="O" && state.board[6]==="O"){
+                playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+}
 }
 
 
 buildInitialState();
 renderBoard();
 renderPlayers();
+scoreBox();
+renderScoreNames();
+
 
 
 
@@ -88,23 +146,17 @@ playersBoxElem.addEventListener('click', (event) => {
         const player2Value = player2Input.value;
         state.players[1] = player2Value;
         
-        scoreBox();
-        renderScoreNames();
+        playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
+
+        restartButton();
     }
 });
 
-//  Add "X" and "O" each click
-boardElem.addEventListener('click', (event) => {
-    if (event.target.innerText === "" && state.players[0] !== null){
-        if (count % 2 === 0){
-        event.target.innerText = "X";
-        }
-        else{
-        event.target.innerText = "O";
-        }
-        count++
 
-        // This should be a loop function but wasn't able to get it to work
+boardElem.addEventListener('click', (event) => {
+    placeMarks(event);
+
+        
         state.board[0] = (boxes[0].innerText)
         state.board[1] = (boxes[1].innerText)
         state.board[2] = (boxes[2].innerText)
@@ -114,7 +166,6 @@ boardElem.addEventListener('click', (event) => {
         state.board[6] = (boxes[6].innerText)
         state.board[7] = (boxes[7].innerText)
         state.board[8] = (boxes[8].innerText)
-    }   
 
     if (count % 2 === 0 && count > 0){
         playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
@@ -122,14 +173,17 @@ boardElem.addEventListener('click', (event) => {
     else if (count % 2 !== 0 && count !== 0) {
         playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`
     }
-    
-    // Not sure why this isn't working. If I enter it into the console, these values appear to be equal when the board is equal. I would have repeated this for all 16 winning conditions. Probably not the most efficient way to go about this, but it was the only thing I could come up with. I would have also have the console.log as a text display with the winner's name shown. 
-    if (state.board.slice(0,3) === ['X', 'X', 'X'] || state.board.slice(0,3) === ['O', 'O', 'O'] ) {
-        console.log("Winner");
-    }
+    winner()
+    restartButton();
 
-    // This reset/restart button is working relatively well but it does have a few bugs that I ran out of time to fix. One bug is with a newly rendered board: If you click anywhere on the board, the button continues to propogate itself. Figured I needed to maybe do something with stop.propogation, but I couldn't get it to work. The other bug is after the reset button is clicked and the board is clicked immediately afterwards without any player names being entered. 
-    restartButton()
+    // if (playersBoxElem.innerHTML === `${state.players[0]} Wins!!` || playersBoxElem.innerHTML === `${state.players[1]} Wins!!`) {
+    //     boardElem.removeEventListener('click', (event) => {
+    //         event.target.innerText = event.target.innerText;
+    //     } ) ;
+    // }
+    
+   
+    
 });
 
 // Reset Board
