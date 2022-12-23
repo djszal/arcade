@@ -16,17 +16,20 @@ const scoreBoxElem = document.querySelector(".score-box");
 
 //********************** Render DOM Initial State *****************************
 let count = 0;
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+console.log(randomNumber);
+console.log(randomNumber % 2);
 
-const winningArray1 = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6],
-];
+// const winningArray1 = [
+//   [0, 1, 2],
+//   [3, 4, 5],
+//   [6, 7, 8],
+//   [0, 3, 6],
+//   [1, 4, 7],
+//   [2, 5, 8],
+//   [0, 4, 8],
+//   [2, 4, 6],
+// ];
 
 function renderBoard() {
   boardElem.innerText = "";
@@ -38,13 +41,11 @@ function renderBoard() {
 }
 
 function renderPlayers() {
-  let text = null;
+  //   let text = null;
   if (state.players[0] === null && state.players[1] === null) {
     text = `<input name="player1" placeholder="Enter Player 1"/>
         <input name="player2" placeholder="Enter Player 2"/>
         <input type="button" class="start" value="Start Game"/>`;
-  } else {
-    text = `It is ${state.players[0]}'s turn.`;
   }
   playersBoxElem.innerHTML = text;
 }
@@ -67,10 +68,14 @@ function renderScoreNames() {
 
 function restartButton() {
   let reset = null;
-  reset = `<input type="button" class="reset" value="Reset"/>`;
-  const resetButton = document.createElement("div");
-  playersBoxElem.append(resetButton);
-  resetButton.innerHTML = reset;
+  if (state.players[0] !== null || !state.players[1] !== null) {
+    reset = `<input type="button" class="reset" value="Reset"/>`;
+    const resetButton = document.createElement("div");
+    playersBoxElem.append(resetButton);
+    resetButton.innerHTML = reset;
+  } else {
+    return;
+  }
 }
 
 function placeMarks(event) {
@@ -91,9 +96,7 @@ function winner() {
     state.board[2] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    boardElem.removeEventListener("click", (event) => {
-      placeMarks(event);
-    });
+    state.score[0] = 1;
   } else if (
     state.board[3] === "X" &&
     state.board[4] === "X" &&
@@ -184,9 +187,10 @@ function winner() {
     state.board[6] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-  } else {
-    playersBoxElem.innerHTML = `Draw!!`;
   }
+  //   else {
+  //     playersBoxElem.innerHTML = `Draw!!`;
+  //   }
 }
 
 buildInitialState();
@@ -201,7 +205,7 @@ const divs = document.getElementsByTagName("div");
 
 // Allows input of player names and renders some game elements after click.
 playersBoxElem.addEventListener("click", (event) => {
-  if (event.target.className === "start") {
+  if (event.target.className === "start" && randomNumber % 2 === 0) {
     const player1Input = document.querySelector("input[name=player1]");
     const player1Value = player1Input.value;
     state.players[0] = player1Value;
@@ -214,6 +218,19 @@ playersBoxElem.addEventListener("click", (event) => {
 
     restartButton();
     renderScoreNames();
+  } else if (event.target.className === "start" && randomNumber % 2 !== 0) {
+    const player1Input = document.querySelector("input[name=player1]");
+    const player1Value = player1Input.value;
+    state.players[0] = player1Value;
+
+    const player2Input = document.querySelector("input[name=player2]");
+    const player2Value = player2Input.value;
+    state.players[1] = player2Value;
+
+    playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
+
+    renderScoreNames();
+    restartButton();
   }
 });
 
@@ -237,18 +254,12 @@ boardElem.addEventListener("click", (event) => {
   }
   winner();
   restartButton();
-
-  // if (playersBoxElem.innerHTML === `${state.players[0]} Wins!!` || playersBoxElem.innerHTML === `${state.players[1]} Wins!!`) {
-  //     boardElem.removeEventListener('click', (event) => {
-  //         event.target.innerText = event.target.innerText;
-  //     } ) ;
-  // }
 });
 
 // Reset Board
 playersBoxElem.addEventListener("click", (event) => {
   if (event.target.className === "reset") {
-    boardElem.innerText = null;
+    // boardElem.innerText = null;
     buildInitialState();
     renderBoard();
     renderPlayers();

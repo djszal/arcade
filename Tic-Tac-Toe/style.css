@@ -35,11 +35,20 @@ main {
     font-size: 75px;
     font-weight: bold;
 }
+#player-name-score {
+    display: flex;
+    justify-content: space-between;
+
+}
 
 .players-box {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+}
+
+.reset {
+    margin-left: 20px;
 }
 
 .current-player {
