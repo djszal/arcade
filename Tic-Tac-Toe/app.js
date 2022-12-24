@@ -19,6 +19,10 @@ let count = 0;
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
 console.log(randomNumber % 2);
+function checkGuess() {
+  alert("I am a placeholder");
+}
+checkGuess();
 
 // const winningArray1 = [
 //   [0, 1, 2],
@@ -200,11 +204,12 @@ scoreBox();
 
 const boxes = document.getElementsByClassName("box");
 const divs = document.getElementsByTagName("div");
+const startButton = document.querySelector(".start");
 
 // //****************** LISTENERS ********************************
 
 // Allows input of player names and renders some game elements after click.
-playersBoxElem.addEventListener("click", (event) => {
+startButton.addEventListener("click", (event) => {
   if (event.target.className === "start" && randomNumber % 2 === 0) {
     const player1Input = document.querySelector("input[name=player1]");
     const player1Value = player1Input.value;
@@ -253,7 +258,7 @@ boardElem.addEventListener("click", (event) => {
     playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
   }
   winner();
-  restartButton();
+  //   restartButton();
 });
 
 // Reset Board
@@ -263,5 +268,6 @@ playersBoxElem.addEventListener("click", (event) => {
     buildInitialState();
     renderBoard();
     renderPlayers();
+    randomNumber = Math.floor(Math.random() * 100) + 1;
   }
 });
