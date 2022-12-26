@@ -19,10 +19,10 @@ let count = 0;
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
 console.log(randomNumber % 2);
-function checkGuess() {
-  alert("I am a placeholder");
-}
-checkGuess();
+// function checkGuess() {
+//   alert("I am a placeholder");
+// }
+// checkGuess();
 
 // const winningArray1 = [
 //   [0, 1, 2],
@@ -101,100 +101,120 @@ function winner() {
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
     state.score[0] = 1;
+    restartButton();
   } else if (
     state.board[3] === "X" &&
     state.board[4] === "X" &&
     state.board[5] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+    restartButton();
   } else if (
     state.board[6] === "X" &&
     state.board[7] === "X" &&
     state.board[8] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+    restartButton();
   } else if (
     state.board[0] === "X" &&
     state.board[3] === "X" &&
     state.board[6] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+    restartButton();
   } else if (
     state.board[1] === "X" &&
     state.board[4] === "X" &&
     state.board[7] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+    restartButton();
   } else if (
     state.board[2] === "X" &&
     state.board[5] === "X" &&
     state.board[8] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+    restartButton();
   } else if (
     state.board[0] === "X" &&
     state.board[4] === "X" &&
     state.board[8] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+    restartButton();
   } else if (
     state.board[2] === "X" &&
     state.board[4] === "X" &&
     state.board[6] === "X"
   ) {
     playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+    restartButton();
   } else if (
     state.board[0] === "O" &&
     state.board[1] === "O" &&
     state.board[2] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
   } else if (
     state.board[3] === "O" &&
     state.board[4] === "O" &&
     state.board[5] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
   } else if (
     state.board[6] === "O" &&
     state.board[7] === "O" &&
     state.board[8] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
   } else if (
     state.board[0] === "O" &&
     state.board[3] === "O" &&
     state.board[6] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
   } else if (
     state.board[1] === "O" &&
     state.board[4] === "O" &&
     state.board[7] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
   } else if (
     state.board[2] === "O" &&
     state.board[5] === "O" &&
     state.board[8] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
   } else if (
     state.board[0] === "O" &&
     state.board[4] === "O" &&
     state.board[8] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
   } else if (
     state.board[2] === "O" &&
     state.board[4] === "O" &&
     state.board[6] === "O"
   ) {
     playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+    restartButton();
+  } else if (
+    count === 9 &&
+    playersBoxElem.innerHTML !== `${state.players[1]} Wins!!` &&
+    playersBoxElem.innerHTML !== `${state.players[0]} Wins!!`
+  ) {
+    playersBoxElem.innerHTML = `Draw!!`;
+    restartButton();
   }
-  //   else {
-  //     playersBoxElem.innerHTML = `Draw!!`;
-  //   }
 }
 
 buildInitialState();
@@ -202,9 +222,13 @@ renderBoard();
 renderPlayers();
 scoreBox();
 
-const boxes = document.getElementsByClassName("box");
+// const boxes = document.getElementsByClassName("box");
+const boxes = document.querySelectorAll(".box");
 const divs = document.getElementsByTagName("div");
 const startButton = document.querySelector(".start");
+console.log(boxes);
+console.log(boardElem);
+console.log(count);
 
 // //****************** LISTENERS ********************************
 
@@ -219,9 +243,9 @@ startButton.addEventListener("click", (event) => {
     const player2Value = player2Input.value;
     state.players[1] = player2Value;
 
-    playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
+    // playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
 
-    restartButton();
+    // restartButton();
     renderScoreNames();
   } else if (event.target.className === "start" && randomNumber % 2 !== 0) {
     const player1Input = document.querySelector("input[name=player1]");
@@ -232,10 +256,10 @@ startButton.addEventListener("click", (event) => {
     const player2Value = player2Input.value;
     state.players[1] = player2Value;
 
-    playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
+    // playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
 
     renderScoreNames();
-    restartButton();
+    // restartButton();
   }
 });
 
@@ -252,7 +276,7 @@ boardElem.addEventListener("click", (event) => {
   state.board[7] = boxes[7].innerText;
   state.board[8] = boxes[8].innerText;
 
-  if (count % 2 === 0 && count > 0) {
+  if (count % 2 === 0 && count >= 0) {
     playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
   } else if (count % 2 !== 0 && count !== 0) {
     playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
