@@ -18,7 +18,7 @@ const scoreBoxElem = document.querySelector(".score-box");
 let count = 0;
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
-console.log(randomNumber % 2);
+
 // function checkGuess() {
 //   alert("I am a placeholder");
 // }
@@ -90,6 +90,7 @@ function placeMarks(event) {
       event.target.innerText = "O";
     }
     count++;
+    console.log(count);
   }
 }
 
@@ -226,9 +227,9 @@ scoreBox();
 const boxes = document.querySelectorAll(".box");
 const divs = document.getElementsByTagName("div");
 const startButton = document.querySelector(".start");
-console.log(boxes);
-console.log(boardElem);
-console.log(count);
+// console.log(boxes);
+// console.log(boardElem);
+// console.log(count);
 
 // //****************** LISTENERS ********************************
 
@@ -243,9 +244,8 @@ startButton.addEventListener("click", (event) => {
     const player2Value = player2Input.value;
     state.players[1] = player2Value;
 
-    // playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
+    playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
 
-    // restartButton();
     renderScoreNames();
   } else if (event.target.className === "start" && randomNumber % 2 !== 0) {
     const player1Input = document.querySelector("input[name=player1]");
@@ -256,10 +256,9 @@ startButton.addEventListener("click", (event) => {
     const player2Value = player2Input.value;
     state.players[1] = player2Value;
 
-    // playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
+    playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
 
     renderScoreNames();
-    // restartButton();
   }
 });
 
@@ -276,13 +275,12 @@ boardElem.addEventListener("click", (event) => {
   state.board[7] = boxes[7].innerText;
   state.board[8] = boxes[8].innerText;
 
-  if (count % 2 === 0 && count >= 0) {
-    playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
-  } else if (count % 2 !== 0 && count !== 0) {
+  if (playersBoxElem.innerHTML === `It is ${state.players[0]}'s turn.`) {
     playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
+  } else {
+    playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
   }
   winner();
-  //   restartButton();
 });
 
 // Reset Board
