@@ -24,17 +24,6 @@ console.log(randomNumber);
 // }
 // checkGuess();
 
-// const winningArray1 = [
-//   [0, 1, 2],
-//   [3, 4, 5],
-//   [6, 7, 8],
-//   [0, 3, 6],
-//   [1, 4, 7],
-//   [2, 5, 8],
-//   [0, 4, 8],
-//   [2, 4, 6],
-// ];
-
 function renderBoard() {
   boardElem.innerText = "";
   for (let i = 0; i < state.board.length; i++) {
@@ -71,15 +60,10 @@ function renderScoreNames() {
 }
 
 function restartButton() {
-  let reset = null;
-  if (state.players[0] !== null || !state.players[1] !== null) {
-    reset = `<input type="button" class="reset" value="Reset"/>`;
-    const resetButton = document.createElement("div");
-    playersBoxElem.append(resetButton);
-    resetButton.innerHTML = reset;
-  } else {
-    return;
-  }
+  let reset = `<input type="button" class="reset" value="Reset"/>`;
+  const resetButton = document.createElement("div");
+  playersBoxElem.append(resetButton);
+  resetButton.innerHTML = reset;
 }
 
 function placeMarks(event) {
@@ -234,7 +218,8 @@ const startButton = document.querySelector(".start");
 // //****************** LISTENERS ********************************
 
 // Allows input of player names and renders some game elements after click.
-startButton.addEventListener("click", (event) => {
+playersBoxElem.addEventListener("click", (event) => {
+  console.log("Hello Start");
   if (event.target.className === "start" && randomNumber % 2 === 0) {
     const player1Input = document.querySelector("input[name=player1]");
     const player1Value = player1Input.value;
@@ -290,6 +275,12 @@ playersBoxElem.addEventListener("click", (event) => {
     buildInitialState();
     renderBoard();
     renderPlayers();
+    count = 0;
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].innerText = null;
+    }
     randomNumber = Math.floor(Math.random() * 100) + 1;
+    console.log("reset count", count);
+    console.log("reset rando", randomNumber);
   }
 });
