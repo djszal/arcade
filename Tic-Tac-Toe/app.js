@@ -2,10 +2,10 @@ let state = {};
 
 function buildInitialState() {
   state.board = [null, null, null, null, null, null, null, null, null];
-  state.players = [null, null];
 }
 function dynamicState() {
   state.score = [0, 0];
+  state.players = [null, null];
 }
 dynamicState();
 //********************** DOM Selectors *****************************
@@ -18,11 +18,6 @@ const scoreBoxElem = document.querySelector(".score-box");
 let count = 0;
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
-
-// function checkGuess() {
-//   alert("I am a placeholder");
-// }
-// checkGuess();
 
 function renderBoard() {
   boardElem.innerText = "";
@@ -43,23 +38,28 @@ function renderPlayers() {
   playersBoxElem.innerHTML = text;
 }
 
-function scoreBox() {
-  scoreBoxElem.innerText = "Score";
-}
+// function scoreBox() {
+//   scoreBoxElem.innerText = "Score";
+// }
 
 function renderScoreNames() {
-  for (let i = 0; i < state.players.length; i++) {
-    const plyrName = state.players[i];
-    console.log(state.score);
-    const score = state.score[0];
-    const plyrNameScore = document.createElement("h3");
-    plyrNameScore.setAttribute("id", "player-name-score");
-    plyrNameScore.innerText = plyrName + ": " + score;
-    scoreBoxElem.appendChild(plyrNameScore);
-  }
+  //   for (let i = 0; i < state.players.length; i++) {
+  //     const plyrName = state.players[i];
+  //     console.log(state.score);
+  //     const score = state.score[i];
+  //     const plyrNameScore = document.createElement("h3");
+  //     plyrNameScore.setAttribute("id", "player-name-score");
+  //     plyrNameScore.innerText = plyrName + ": " + score;
+  //     scoreBoxElem.appendChild(plyrNameScore);
+  //   }
+  scoreBoxElem.innerHTML = `
+  <h3>Score</h3>
+  <div>${state.players[0]} : ${state.score[0]}</div>
+  <div>${state.players[1]} : ${state.score[1]}</div>
+  `;
 }
 
-function restartButton() {
+function resetButton() {
   let reset = `<input type="button" class="reset" value="Reset"/>`;
   const resetButton = document.createElement("div");
   playersBoxElem.append(resetButton);
@@ -84,161 +84,265 @@ function winner() {
     state.board[1] === "X" &&
     state.board[2] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    state.score[0] = 1;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[3] === "X" &&
     state.board[4] === "X" &&
     state.board[5] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[6] === "X" &&
     state.board[7] === "X" &&
     state.board[8] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[0] === "X" &&
     state.board[3] === "X" &&
     state.board[6] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[1] === "X" &&
     state.board[4] === "X" &&
     state.board[7] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[2] === "X" &&
     state.board[5] === "X" &&
     state.board[8] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[0] === "X" &&
     state.board[4] === "X" &&
     state.board[8] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[2] === "X" &&
     state.board[4] === "X" &&
     state.board[6] === "X"
   ) {
-    playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    }
   } else if (
     state.board[0] === "O" &&
     state.board[1] === "O" &&
     state.board[2] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     state.board[3] === "O" &&
     state.board[4] === "O" &&
     state.board[5] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     state.board[6] === "O" &&
     state.board[7] === "O" &&
     state.board[8] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     state.board[0] === "O" &&
     state.board[3] === "O" &&
     state.board[6] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     state.board[1] === "O" &&
     state.board[4] === "O" &&
     state.board[7] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     state.board[2] === "O" &&
     state.board[5] === "O" &&
     state.board[8] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     state.board[0] === "O" &&
     state.board[4] === "O" &&
     state.board[8] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     state.board[2] === "O" &&
     state.board[4] === "O" &&
     state.board[6] === "O"
   ) {
-    playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-    restartButton();
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+      state.score[1]++;
+      resetButton();
+    } else {
+      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+      state.score[0]++;
+      resetButton();
+    }
   } else if (
     count === 9 &&
     playersBoxElem.innerHTML !== `${state.players[1]} Wins!!` &&
     playersBoxElem.innerHTML !== `${state.players[0]} Wins!!`
   ) {
-    playersBoxElem.innerHTML = `Draw!!`;
-    restartButton();
+    playersBoxElem.innerHTML = `DRAW!!`;
+    resetButton();
   }
 }
 
 buildInitialState();
 renderBoard();
 renderPlayers();
-scoreBox();
 
-// const boxes = document.getElementsByClassName("box");
-const boxes = document.querySelectorAll(".box");
 const divs = document.getElementsByTagName("div");
 const startButton = document.querySelector(".start");
-// console.log(boxes);
-// console.log(boardElem);
-// console.log(count);
+const boxes = document.querySelectorAll(".box");
+const resetButtonElem = document.querySelector(".reset");
 
 // //****************** LISTENERS ********************************
 
-// Allows input of player names and renders some game elements after click.
-playersBoxElem.addEventListener("click", (event) => {
-  console.log("Hello Start");
-  if (event.target.className === "start" && randomNumber % 2 === 0) {
-    const player1Input = document.querySelector("input[name=player1]");
-    const player1Value = player1Input.value;
-    state.players[0] = player1Value;
+startButton.addEventListener("click", (event) => {
+  const player1Input = document.querySelector("input[name=player1]");
+  const player1Value = player1Input.value;
+  const player2Input = document.querySelector("input[name=player2]");
+  const player2Value = player2Input.value;
 
-    const player2Input = document.querySelector("input[name=player2]");
-    const player2Value = player2Input.value;
+  if (!player1Value || !player2Value) {
+    return;
+  }
+
+  if (randomNumber % 2 === 0) {
+    state.players[0] = player1Value;
     state.players[1] = player2Value;
 
     playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
 
     renderScoreNames();
-  } else if (event.target.className === "start" && randomNumber % 2 !== 0) {
-    const player1Input = document.querySelector("input[name=player1]");
-    const player1Value = player1Input.value;
+  } else if (randomNumber % 2 !== 0) {
     state.players[0] = player1Value;
-
-    const player2Input = document.querySelector("input[name=player2]");
-    const player2Value = player2Input.value;
     state.players[1] = player2Value;
 
     playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
@@ -248,39 +352,46 @@ playersBoxElem.addEventListener("click", (event) => {
 });
 
 boardElem.addEventListener("click", (event) => {
-  placeMarks(event);
+  if (event.target.innerText !== "X" && event.target.innerText !== "O") {
+    placeMarks(event);
 
-  state.board[0] = boxes[0].innerText;
-  state.board[1] = boxes[1].innerText;
-  state.board[2] = boxes[2].innerText;
-  state.board[3] = boxes[3].innerText;
-  state.board[4] = boxes[4].innerText;
-  state.board[5] = boxes[5].innerText;
-  state.board[6] = boxes[6].innerText;
-  state.board[7] = boxes[7].innerText;
-  state.board[8] = boxes[8].innerText;
+    for (i = 0; i < boxes.length; i++) {
+      state.board[i] = boxes[i].innerText;
+    }
 
-  if (playersBoxElem.innerHTML === `It is ${state.players[0]}'s turn.`) {
-    playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
-  } else {
-    playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
+    if (playersBoxElem.innerHTML === `It is ${state.players[0]}'s turn.`) {
+      playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
+    } else if (
+      playersBoxElem.innerHTML === `It is ${state.players[1]}'s turn.`
+    ) {
+      playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
+    }
+    winner();
   }
-  winner();
 });
 
 // Reset Board
 playersBoxElem.addEventListener("click", (event) => {
   if (event.target.className === "reset") {
-    // boardElem.innerText = null;
+    boardElem.innerText = "";
     buildInitialState();
     renderBoard();
-    renderPlayers();
+    renderScoreNames();
     count = 0;
+    const boxes = document.querySelectorAll(".box");
     for (let i = 0; i < boxes.length; i++) {
-      boxes[i].innerText = null;
+      boxes[i].innerText = "";
     }
     randomNumber = Math.floor(Math.random() * 100) + 1;
     console.log("reset count", count);
     console.log("reset rando", randomNumber);
+    console.log("reset state", state);
+    console.log("reset boxes", boxes);
+
+    if (randomNumber % 2 === 0) {
+      playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
+    } else {
+      playersBoxElem.innerHTML = `It is ${state.players[1]}'s turn.`;
+    }
   }
 });
