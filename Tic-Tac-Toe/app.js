@@ -29,7 +29,7 @@ function renderBoard() {
 }
 
 function renderPlayers() {
-  //   let text = null;
+  let text = null;
   if (state.players[0] === null && state.players[1] === null) {
     text = `<input name="player1" placeholder="Enter Player 1"/>
         <input name="player2" placeholder="Enter Player 2"/>
@@ -38,20 +38,7 @@ function renderPlayers() {
   playersBoxElem.innerHTML = text;
 }
 
-// function scoreBox() {
-//   scoreBoxElem.innerText = "Score";
-// }
-
 function renderScoreNames() {
-  //   for (let i = 0; i < state.players.length; i++) {
-  //     const plyrName = state.players[i];
-  //     console.log(state.score);
-  //     const score = state.score[i];
-  //     const plyrNameScore = document.createElement("h3");
-  //     plyrNameScore.setAttribute("id", "player-name-score");
-  //     plyrNameScore.innerText = plyrName + ": " + score;
-  //     scoreBoxElem.appendChild(plyrNameScore);
-  //   }
   scoreBoxElem.innerHTML = `
   <h3>Score</h3>
   <div>${state.players[0]} : ${state.score[0]}</div>
@@ -67,7 +54,12 @@ function resetButton() {
 }
 
 function placeMarks(event) {
-  if (event.target.innerText === "" && state.players[0] !== null) {
+  if (
+    event.target.innerText === "" &&
+    state.players[0] !== null &&
+    playersBoxElem.innerText !== `${state.players[0]} Wins!!` &&
+    playersBoxElem.innerText !== `${state.players[1]} Wins!!`
+  ) {
     if (count % 2 === 0) {
       event.target.innerText = "X";
     } else {
@@ -86,7 +78,7 @@ function winner() {
   ) {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+      state.score[0] += 1;
       resetButton();
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
@@ -373,20 +365,14 @@ boardElem.addEventListener("click", (event) => {
 // Reset Board
 playersBoxElem.addEventListener("click", (event) => {
   if (event.target.className === "reset") {
-    boardElem.innerText = "";
     buildInitialState();
-    renderBoard();
     renderScoreNames();
     count = 0;
-    const boxes = document.querySelectorAll(".box");
     for (let i = 0; i < boxes.length; i++) {
       boxes[i].innerText = "";
     }
     randomNumber = Math.floor(Math.random() * 100) + 1;
-    console.log("reset count", count);
-    console.log("reset rando", randomNumber);
-    console.log("reset state", state);
-    console.log("reset boxes", boxes);
+    console.log(randomNumber);
 
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
