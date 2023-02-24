@@ -6,6 +6,7 @@ function buildInitialState() {
 function dynamicState() {
   state.score = [0, 0];
   state.players = [null, null];
+  state.gameOver = false;
 }
 dynamicState();
 //********************** DOM Selectors *****************************
@@ -79,12 +80,12 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0] += 1;
-      resetButton();
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[3] === "X" &&
     state.board[4] === "X" &&
@@ -93,12 +94,12 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[6] === "X" &&
     state.board[7] === "X" &&
@@ -107,12 +108,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[0] === "X" &&
     state.board[3] === "X" &&
@@ -121,12 +124,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[1] === "X" &&
     state.board[4] === "X" &&
@@ -135,12 +140,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[2] === "X" &&
     state.board[5] === "X" &&
@@ -149,12 +156,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+     
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[0] === "X" &&
     state.board[4] === "X" &&
@@ -163,12 +172,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+     
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[2] === "X" &&
     state.board[4] === "X" &&
@@ -177,12 +188,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[0] === "O" &&
     state.board[1] === "O" &&
@@ -191,12 +204,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+     
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+     
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[3] === "O" &&
     state.board[4] === "O" &&
@@ -205,12 +220,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+     
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[6] === "O" &&
     state.board[7] === "O" &&
@@ -219,12 +236,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+     
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+     
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[0] === "O" &&
     state.board[3] === "O" &&
@@ -233,12 +252,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[1] === "O" &&
     state.board[4] === "O" &&
@@ -247,12 +268,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[2] === "O" &&
     state.board[5] === "O" &&
@@ -261,12 +284,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+      
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[0] === "O" &&
     state.board[4] === "O" &&
@@ -275,12 +300,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+     
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     state.board[2] === "O" &&
     state.board[4] === "O" &&
@@ -289,12 +316,14 @@ function winner() {
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
       state.score[1]++;
-      resetButton();
+     
     } else {
       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
       state.score[0]++;
-      resetButton();
+      
     }
+    state.gameOver=true;
+    resetButton();
   } else if (
     count === 9 &&
     playersBoxElem.innerHTML !== `${state.players[1]} Wins!!` &&
@@ -302,6 +331,7 @@ function winner() {
   ) {
     playersBoxElem.innerHTML = `DRAW!!`;
     resetButton();
+    state.gameOver=true;
   }
 }
 
@@ -358,6 +388,10 @@ boardElem.addEventListener("click", (event) => {
     ) {
       playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
     }
+    
+    if(state.gameOver===true){
+      return
+    }
     winner();
   }
 });
@@ -368,6 +402,7 @@ playersBoxElem.addEventListener("click", (event) => {
     buildInitialState();
     renderScoreNames();
     count = 0;
+    state.gameOver=false;
     for (let i = 0; i < boxes.length; i++) {
       boxes[i].innerText = "";
     }
@@ -381,3 +416,5 @@ playersBoxElem.addEventListener("click", (event) => {
     }
   }
 });
+
+
