@@ -18,7 +18,7 @@ const scoreBoxElem = document.querySelector(".score-box");
 //********************** Render DOM Initial State *****************************
 let count = 0;
 let randomNumber = Math.floor(Math.random() * 100) + 1;
-console.log(randomNumber);
+
 
 function renderBoard() {
   boardElem.innerText = "";
@@ -67,7 +67,7 @@ function placeMarks(event) {
       event.target.innerText = "O";
     }
     count++;
-    console.log(count);
+    
   }
 }
 
@@ -407,7 +407,6 @@ playersBoxElem.addEventListener("click", (event) => {
       boxes[i].innerText = "";
     }
     randomNumber = Math.floor(Math.random() * 100) + 1;
-    console.log(randomNumber);
 
     if (randomNumber % 2 === 0) {
       playersBoxElem.innerHTML = `It is ${state.players[0]}'s turn.`;
