@@ -1,0 +1,26 @@
+
+
+.board-box{
+border: solid black;
+display: flex;
+justify-content: space-around;
+align-items: center;
+
+
+}
+.boxes-box{
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 50px 50px;
+    
+    border: solid black;
+}
+
+.box{
+    border: red dashed;
+    text-align: center;
+    padding: 20px;
+}
+
+.endCaps{
+    padding: 50px;
+}
