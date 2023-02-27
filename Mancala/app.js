@@ -31,8 +31,6 @@ function buildInitialState(){
     body.appendChild(title)
 
     
-
-    
 }
 
 function renderPlayerBox(){
@@ -60,7 +58,14 @@ function renderPlayerBox(){
     playerTwoInput.setAttribute('placeholder', 'Enter Player Two Name');
     playerBox.appendChild(playerTwoInput);
 
+    const playGameButton = document.createElement('button');
+    playGameButton.setAttribute('type', 'button');
+    playGameButton.textContent = 'Play Game';
+    playerBox.appendChild(playGameButton);
+
+
 }
+
 function renderBoard(){
     body.appendChild(boardBox)
 
