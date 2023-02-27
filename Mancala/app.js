@@ -45,10 +45,20 @@ function renderPlayerBox(){
     playerOne.textContent = 'Player One:';
     playerBox.appendChild(playerOne);
 
+    const playerOneInput = document.createElement('input')
+    playerOneInput.setAttribute('type', 'text');
+    playerOneInput.setAttribute('placeholder', 'Enter Player One Name');
+    playerBox.appendChild(playerOneInput);
+
     const playerTwo = document.createElement('h3');
     playerTwo.setAttribute('class', 'players');
     playerTwo.textContent = 'Player Two:';
     playerBox.appendChild(playerTwo);
+
+    const playerTwoInput = document.createElement('input')
+    playerTwoInput.setAttribute('type', 'text');
+    playerTwoInput.setAttribute('placeholder', 'Enter Player Two Name');
+    playerBox.appendChild(playerTwoInput);
 
 }
 function renderBoard(){
@@ -100,18 +110,21 @@ const winConditions =() =>{
 
 const playerClick = (e) => {
     if (e.target.className !== "endCaps"){
-        console.log("IDX",e.target.idx)
+        console.log("IDX",e.target.innerText)
+        let clickedValue = e.target.innerText
+        console.log(typeof clickedValue)
         for(let i = 0; i<state.board.length; i++){
             for (let j=0; j<state.board[i].length; j++){
                 if(state.board[i][j].index===e.target.idx){
                     state.board[i][j].value=0
                     e.target.innerText = 0
-                    // renderBoard()
+                    // boardBox.remove();
+                    // renderBoard();
                     console.log(state.board[i][j].value)
-                
-
+                    
+                    
+                }
             }
-        }
         }  
     }
 }
