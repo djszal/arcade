@@ -13,7 +13,19 @@ boardBox.setAttribute('class', 'board-box');
 
 function buildInitialState(){
     state.ends = [0,0]
-    state.board = [[4,4,4,4,4,4],[4,4,4,4,4,4]]
+    state.board = [
+        [{index:1, value:4},
+        {index:2, value:4},
+        {index:3, value:4},
+        {index:4, value:4},
+        {index:5, value:4},
+        {index:6, value:4}],
+        [{index:7, value:4},
+        {index:8, value:4},
+        {index:9, value:4},
+        {index:10, value:4},
+        {index:11, value:4},
+        {index:12, value:4}]]
 
     title.textContent = 'Mancala'
     body.appendChild(title)
@@ -57,11 +69,11 @@ function renderBoard(){
         for (let j=0; j<state.board[i].length; j++){
         const box = document.createElement('div')
         box.setAttribute('class', 'box');
-        box.value = k
+        box.idx = k
         k++
-        box.innerText= state.board[i][j]
+        box.innerText= state.board[i][j].value
         boxesBox.appendChild(box)
-        console.log(box[1])
+        // console.log(box[1])
     }
 }
     const endCapTwo = document.createElement('div')
@@ -88,13 +100,18 @@ const winConditions =() =>{
 
 const playerClick = (e) => {
     if (e.target.className !== "endCaps"){
-        console.log(e.target.value)
-        for(let i = 0; i<allPlayerBoxes.length; i++){
-            if(e.target.value===allPlayerBoxes[i].value){
+        console.log("IDX",e.target.idx)
+        for(let i = 0; i<state.board.length; i++){
+            for (let j=0; j<state.board[i].length; j++){
+                if(state.board[i][j].index===e.target.idx){
+                    state.board[i][j].value=0
+                    e.target.innerText = 0
+                    // renderBoard()
+                    console.log(state.board[i][j].value)
                 
-            console.log("PP",allPlayerBoxes[i].textContent)
-            }
 
+            }
+        }
         }  
     }
 }
