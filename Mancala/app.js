@@ -12,20 +12,26 @@ boardBox.setAttribute('class', 'board-box');
 
 
 function buildInitialState(){
-    state.ends = [0,0]
+    
     state.board = [
-        [{index:1, value:4},
-        {index:2, value:4},
-        {index:3, value:4},
-        {index:4, value:4},
-        {index:5, value:4},
-        {index:6, value:4}],
-        [{index:7, value:4},
-        {index:8, value:4},
-        {index:9, value:4},
-        {index:10, value:4},
-        {index:11, value:4},
-        {index:12, value:4}]]
+        {index:0, value:0, name:'Player One Store'},
+        {index:1, value:4, name:'Player One Pit'},
+        {index:2, value:4, name:'Player One Pit'},
+        {index:3, value:4, name:'Player One Pit'},
+        {index:4, value:4, name:'Player One Pit'},
+        {index:5, value:4, name:'Player One Pit'},
+        {index:6, value:4, name:'Player One Pit'},
+        {index:7, value:4, name:'Player Two Pit'},
+        {index:8, value:4, name:'Player Two Pit'},
+        {index:9, value:4, name:'Player Two Pit'},
+        {index:10, value:4, name:'Player Two Pit'},
+        {index:11, value:4, name:'Player Two Pit'},
+        {index:12, value:4, name:'Player Two Pit'}, 
+        {index:13, value:0, name:'Player Two Store'}]
+
+    state.stores = [state.board[0],state.board[13]]
+    state.test= [state.board[0]]
+    console.log(state.test)
 
     title.textContent = 'Mancala'
     body.appendChild(title)
@@ -71,7 +77,7 @@ function renderBoard(){
 
     const endCapOne = document.createElement('div')
     endCapOne.setAttribute('class', 'endCaps');
-    endCapOne.innerText = state.ends[0]
+    endCapOne.innerText = state.stores[0].value
     endCapOne.value = 0
     boardBox.appendChild(endCapOne)
     
@@ -80,20 +86,20 @@ function renderBoard(){
     boardBox.appendChild(boxesBox)
 
     let k = 1
-    for (let i=0; i<state.board.length; i++){
-        for (let j=0; j<state.board[i].length; j++){
+    for (let i=1; i<state.board.length-1; i++){
+        
         const box = document.createElement('div')
         box.setAttribute('class', 'box');
         box.idx = k
         k++
-        box.innerText= state.board[i][j].value
+        box.innerText= state.board[i].value
         boxesBox.appendChild(box)
         // console.log(box[1])
-    }
+    
 }
     const endCapTwo = document.createElement('div')
     endCapTwo.setAttribute('class', 'endCaps');
-    endCapTwo.innerText = state.ends[1]
+    endCapTwo.innerText = state.stores[1].value
     endCapOne.value = 13
     boardBox.appendChild(endCapTwo)
 
@@ -115,22 +121,30 @@ const winConditions =() =>{
 
 const playerClick = (e) => {
     if (e.target.className !== "endCaps"){
-        console.log("IDX",e.target.innerText)
-        let clickedValue = e.target.innerText
-        console.log(typeof clickedValue)
+        console.log("IDX",e.target.idx)
+        let clickedValue = parseInt(e.target.innerText)
+        // console.log(typeof clickedValue)
         for(let i = 0; i<state.board.length; i++){
-            for (let j=0; j<state.board[i].length; j++){
-                if(state.board[i][j].index===e.target.idx){
-                    state.board[i][j].value=0
+            
+                if(state.board[i].index===e.target.idx){
+                    state.board[i].value=0
                     e.target.innerText = 0
+                        for(let a=1; a<=clickedValue; a++){
+                            if(i<4){
+                            state.board[i+a].value+=1
+                        }
+                        }
+
+
                     // boardBox.remove();
-                    // renderBoard();
-                    console.log(state.board[i][j].value)
+                    console.log(state.board)
+                    break
                     
                     
-                }
+                
             }
         }  
+        // renderBoard();
     }
 }
 
