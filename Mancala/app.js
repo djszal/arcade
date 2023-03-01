@@ -20,7 +20,7 @@ function buildInitialState(){
         {index:3, value:4, name:'Player One Pit'},
         {index:4, value:4, name:'Player One Pit'},
         {index:5, value:4, name:'Player One Pit'},
-        {index:6, value:4, name:'Player One Pit'},
+        {index:6, value:6, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -112,7 +112,8 @@ renderBoard()
 
 const mancalaBoard = document.querySelector(".board-box")
 const allPlayerBoxes = document.querySelectorAll(".box");
-console.log(allPlayerBoxes[0])
+const allEndCaps = document.querySelectorAll(".endCaps");
+console.log(allEndCaps)
 
 
 const winConditions =() =>{
@@ -127,27 +128,33 @@ const playerClick = (e) => {
         let valueChange = clickedValue
         console.log("CCCC",clickedValue)
         console.log("CCCC",clickedIdx)
+
         if(clickedIdx<=6){
             for(let i = clickedIdx; i>=0; i--){
+                console.log(i)
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
+                    console.log(e.target.innerText)
                         // for(let a=1; a<=clickedValue; a++){
                         //     if(i<4){
                         //     state.board[i+a].value+=1
                         // }
                         // }
-
-
                     // boardBox.remove();
                     continue
                 }else if(valueChange === 0){
                     break
-                }else{
+                }
+                else{
                 state.board[i].value+=1
-                allPlayerBoxes[i].innerText=state.board[i].value+=1
+                allPlayerBoxes[i-1].innerText=state.board[i].value
                 valueChange-=1
                 console.log(state.board)
+                    // if(valueChange>=1 && i===0){
+                    //     allEndCaps[0].innerText=1
+                    //     valueChange-=1
+                    // }
                 }
                 
             }
