@@ -112,7 +112,7 @@ renderBoard()
 
 const mancalaBoard = document.querySelector(".board-box")
 const allPlayerBoxes = document.querySelectorAll(".box");
-console.log(allPlayerBoxes)
+console.log(allPlayerBoxes[0])
 
 
 const winConditions =() =>{
@@ -122,25 +122,33 @@ const winConditions =() =>{
 const playerClick = (e) => {
     if (e.target.className !== "endCaps"){
         console.log("IDX",e.target.idx)
+        const clickedIdx = e.target.idx
         let clickedValue = parseInt(e.target.innerText)
-        // console.log(typeof clickedValue)
-        for(let i = 0; i<state.board.length; i++){
-            
-                if(state.board[i].index===e.target.idx){
+        let valueChange = clickedValue
+        console.log("CCCC",clickedValue)
+        console.log("CCCC",clickedIdx)
+        if(clickedIdx<=6){
+            for(let i = clickedIdx; i>=0; i--){
+                if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
-                        for(let a=1; a<=clickedValue; a++){
-                            if(i<4){
-                            state.board[i+a].value+=1
-                        }
-                        }
+                        // for(let a=1; a<=clickedValue; a++){
+                        //     if(i<4){
+                        //     state.board[i+a].value+=1
+                        // }
+                        // }
 
 
                     // boardBox.remove();
-                    console.log(state.board)
+                    continue
+                }else if(valueChange === 0){
                     break
-                    
-                    
+                }else{
+                state.board[i].value+=1
+                allPlayerBoxes[i].innerText=state.board[i].value+=1
+                valueChange-=1
+                console.log(state.board)
+                }
                 
             }
         }  
