@@ -335,9 +335,14 @@ function winner() {
   }
 }
 
+function alertStart(){
+  alert("Please enter player names and click 'Start Game'")
+}
+
 buildInitialState();
 renderBoard();
 renderPlayers();
+alertStart();
 
 const divs = document.getElementsByTagName("div");
 const startButton = document.querySelector(".start");
