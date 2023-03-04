@@ -20,7 +20,7 @@ function buildInitialState(){
         {index:3, value:4, name:'Player One Pit'},
         {index:4, value:4, name:'Player One Pit'},
         {index:5, value:4, name:'Player One Pit'},
-        {index:6, value:20, name:'Player One Pit'},
+        {index:6, value:4, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -131,7 +131,7 @@ const playerClick = (e) => {
         let clickedValue = parseInt(e.target.innerText)
         // store the integer value above in a new variable that can be changed to let us know how many marbles were taken from the clicked pit.
         let valueChange = clickedValue
-        console.log("CCCC",clickedValue)
+        console.log("XXX",clickedValue)
         console.log("CCCC",clickedIdx)
         // if the clicked idx number is less than or equal to 6, we need to iterate backwards since the game is played counter clockwise 
         if(clickedIdx<=6){
@@ -215,36 +215,35 @@ const playerClick = (e) => {
                 }
                 else{
                     state.board[i].value+=1
-                    if(valueChange>=1 && i===0){
+                    if(valueChange>=1 && i===13){
                             allEndCaps[1].innerText=state.board[13].value
                             valueChange-=1
                             if(valueChange>0){
-                                for(let j = 7; j<state.board.length; j++){
+                                for(let j = 6; j>=0; j--){
                                     if(valueChange===0){
                                         return
                                     }
-                                    else if(j!==13){
+                                    else if(j!==0){
                                         state.board[j].value+=1
                                     allPlayerBoxes[j-1].innerText=state.board[j].value
                                     valueChange-=1
                                 }
-                                    else if(j===13){
+                                    else if(j===0){
                                         state.board[j].value+=1
-                                        allEndCaps[1].innerText=state.board[13].value
+                                        allEndCaps[1].innerText=state.board[0].value
                                         valueChange-=1
-                                        console.log(state.board[13])
-                                        console.log(valueChange)
-                                        if(valueChange>=1 && j===13){
-                                            for(let k = 6; k>=0; k--){
+
+                                        if(valueChange>=1 && j===0){
+                                            for(let k = 7; k<=state.board.length; k++){
                                                 if(valueChange===0){
                                                     return
-                                                }else if(k!==0){
+                                                }else if(k!==13){
                                                     state.board[k].value+=1
                                                     allPlayerBoxes[k-1].innerText=state.board[k].value
                                                     valueChange-=1
-                                                }else if(k===0){
+                                                }else if(k===13){
                                                 console.log(state.board)
-                                                allEndCaps[0].innerText=state.board[0].value
+                                                allEndCaps[1].innerText=state.board[13].value
                                                 valueChange-=1
                                             }
                                             }
