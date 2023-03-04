@@ -30,8 +30,10 @@ function buildInitialState(){
         {index:13, value:0, name:'Player Two Store'}]
 
     state.stores = [state.board[0],state.board[13]]
-    state.test= [state.board[0]]
-    console.log(state.test)
+    state.players= [
+        {name:null,score:0},
+        {name:null,score:0}]
+    console.log(state.players)
 
     title.textContent = 'Mancala'
     body.appendChild(title)
@@ -113,8 +115,7 @@ renderBoard()
 const mancalaBoard = document.querySelector(".board-box")
 const allPlayerBoxes = document.querySelectorAll(".box");
 const allEndCaps = document.querySelectorAll(".endCaps");
-console.log(allEndCaps)
-console.log(allPlayerBoxes)
+
 
 
 const winConditions =() =>{
@@ -124,54 +125,46 @@ const winConditions =() =>{
 const playerClick = (e) => {
     // Do noting if player clicks on the ends of the board, otherwise, run the following
     if (e.target.className !== "endCaps"){
-        console.log("IDX",e.target.idx)
         // Store the index number into the variable below
         const clickedIdx = e.target.idx
         // store the inner text value as an integer in the variable below. inner text value matches the state.board value
         let clickedValue = parseInt(e.target.innerText)
         // store the integer value above in a new variable that can be changed to let us know how many marbles were taken from the clicked pit.
         let valueChange = clickedValue
-        console.log("XXX",clickedValue)
-        console.log("CCCC",clickedIdx)
         // if the clicked idx number is less than or equal to 6, we need to iterate backwards since the game is played counter clockwise 
         if(clickedIdx<=6){
             for(let i = clickedIdx; i>=0; i--){
-               
                 // set the value of state.board at the clicked index to 0 and also set the innerText of that index to 0
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
-                    console.log(e.target.innerText)
-                    // boardBox.remove();
                     continue
                 // check to see if the valueChange variable is 0 so that we can stop the loop. 
                 }else if(valueChange === 0){
                     break
-                }
-                // if i!=== the clicked pit and our marbles stored in valueChange is not 0
-                else{
+                    // if i!=== the clicked pit and our marbles stored in valueChange is not 0
+                }else{
                     // add 1 marble to state.board value at each put at i 
                     state.board[i].value+=1
-                    // if there are still marbles in valueChange and i in the fist loop is 0, change the inner text to the value of state.board[0] and decrement the marbles in valueChange
+                    // if there are still marbles in valueChange and i in the fist loop === 0, change the inner text to the value of state.board[0] and decrement the marbles in valueChange
                     if(valueChange>=1 && i===0){
                             allEndCaps[0].innerText=state.board[0].value
                             valueChange-=1
+                            // if valueChange is not 0 (still marbles to move), loop through the bottom board pits and insert marble until there are none left.  
                             if(valueChange>0){
                                 for(let j = 7; j<state.board.length; j++){
                                     if(valueChange===0){
                                         return
-                                    }
-                                    else if(j!==13){
+                                    }else if(j!==13){
                                         state.board[j].value+=1
                                     allPlayerBoxes[j-1].innerText=state.board[j].value
                                     valueChange-=1
-                                }
-                                    else if(j===13){
+                                }else if(j===13){
                                         state.board[j].value+=1
                                         allEndCaps[1].innerText=state.board[13].value
                                         valueChange-=1
                                         console.log(state.board[13])
-                                        console.log(valueChange)
+                                        // If there are still marbles left to place, loop through the top pits of the board again and place a marble until valueChange===0
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
                                                 if(valueChange===0){
@@ -181,39 +174,33 @@ const playerClick = (e) => {
                                                     allPlayerBoxes[k-1].innerText=state.board[k].value
                                                     valueChange-=1
                                                 }else if(k===0){
-                                                console.log(state.board)
                                                 allEndCaps[0].innerText=state.board[0].value
                                                 valueChange-=1
                                             }
-                                            }
                                         }
-                                        }
+                                    }
                                 }
                             }
                         }
-                    else if(i>0){
+                    }else if(i>0){
                         // allPlayersBoxes is one index above the index for state.board. set the value for state.board to the inner text of each pit on the board
                         allPlayerBoxes[i-1].innerText=state.board[i].value
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
                         valueChange-=1
                     }
-                    
                 }
-                
             }
-        }  
+        }
+        // if the pit that is clicked is one of the bottom pits, loop counter clockwise and place marbles into pits(same pattern as above but starting at bottom of board)  
         if(clickedIdx>=7){
             for(let i = clickedIdx; i<=13; i++){
-               
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
-                    console.log(e.target.innerText)
                     continue
                 }else if(valueChange === 0){
                     break
-                }
-                else{
+                }else{
                     state.board[i].value+=1
                     if(valueChange>=1 && i===13){
                             allEndCaps[1].innerText=state.board[13].value
@@ -222,17 +209,14 @@ const playerClick = (e) => {
                                 for(let j = 6; j>=0; j--){
                                     if(valueChange===0){
                                         return
-                                    }
-                                    else if(j!==0){
+                                    }else if(j!==0){
                                         state.board[j].value+=1
                                     allPlayerBoxes[j-1].innerText=state.board[j].value
                                     valueChange-=1
-                                }
-                                    else if(j===0){
+                                }else if(j===0){
                                         state.board[j].value+=1
                                         allEndCaps[1].innerText=state.board[0].value
                                         valueChange-=1
-
                                         if(valueChange>=1 && j===0){
                                             for(let k = 7; k<=state.board.length; k++){
                                                 if(valueChange===0){
@@ -242,28 +226,23 @@ const playerClick = (e) => {
                                                     allPlayerBoxes[k-1].innerText=state.board[k].value
                                                     valueChange-=1
                                                 }else if(k===13){
-                                                console.log(state.board)
                                                 allEndCaps[1].innerText=state.board[13].value
                                                 valueChange-=1
                                             }
-                                            }
                                         }
-                                        }
+                                    }
                                 }
                             }
                         }
-                    else if(i>0){
+                    }else if(i>0){
                         // allPlayersBoxes is one index above the index for state.board. set the value for state.board to the inner text of each pit on the board
                         allPlayerBoxes[i-1].innerText=state.board[i].value
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
                         valueChange-=1
                     }
-                    
                 }
-                
             }
         }  
-        // renderBoard();
     }
 }
 
