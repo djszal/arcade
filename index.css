@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Alata', sans-serif;
+    background-color: #124559;
+    color: white;
+}
+
+
+  .button-box{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 150px;
+
+  }
+  .btn{
+    background-color: transparent;
+    color: white;
+    border: white solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    transition: all .5s ease;
+    text-transform: uppercase;
+    font-size: 17px;
+    
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: #598392;
+    
+}
