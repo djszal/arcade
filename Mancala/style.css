@@ -1,10 +1,23 @@
 
 
+
+.title{
+    display: flex;
+    justify-content: center;
+}
+.player-box{
+    display: flex;
+    justify-content: center;
+}
+
 .board-box{
 border: solid black;
 display: flex;
-justify-content: space-around;
+justify-content: center;
 align-items: center;
+margin-left: 650px;
+margin-right: 650px;
+margin-top: 50px;
 
 
 }
