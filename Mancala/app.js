@@ -53,6 +53,8 @@ function renderPlayerBox(){
 
     const playerOneInput = document.createElement('input')
     playerOneInput.setAttribute('type', 'text');
+    playerOneInput.setAttribute('class', 'input');
+    playerOneInput.setAttribute('name', 'player1');
     playerOneInput.setAttribute('placeholder', 'Enter Player One Name');
     playerBox.appendChild(playerOneInput);
 
@@ -63,11 +65,14 @@ function renderPlayerBox(){
 
     const playerTwoInput = document.createElement('input')
     playerTwoInput.setAttribute('type', 'text');
+    playerTwoInput.setAttribute('class', 'input');
+    playerTwoInput.setAttribute('name', 'player2');
     playerTwoInput.setAttribute('placeholder', 'Enter Player Two Name');
     playerBox.appendChild(playerTwoInput);
 
     const playGameButton = document.createElement('button');
     playGameButton.setAttribute('type', 'button');
+    playGameButton.setAttribute('class', 'button');
     playGameButton.textContent = 'Play Game';
     playerBox.appendChild(playGameButton);
 
@@ -96,7 +101,6 @@ function renderBoard(){
         k++
         box.innerText= state.board[i].value
         boxesBox.appendChild(box)
-        // console.log(box[1])
     
 }
     const endCapTwo = document.createElement('div')
@@ -113,10 +117,18 @@ renderPlayerBox()
 renderBoard()
 
 const mancalaBoard = document.querySelector(".board-box")
+const startGame = document.querySelector(".button")
 const allPlayerBoxes = document.querySelectorAll(".box");
 const allEndCaps = document.querySelectorAll(".endCaps");
 
 
+const setPlayers =(e)=>{
+    const player1Input = document.querySelector("input[name=player1]");
+    const player1Value = player1Input.value;
+    const player2Input = document.querySelector("input[name=player2]");
+    const player2Value = player2Input.value;
+  
+}
 
 const winConditions =() =>{
     
@@ -246,5 +258,6 @@ const playerClick = (e) => {
     }
 }
 
+startGame.addEventListener("click", setPlayers)
 mancalaBoard.addEventListener("click", playerClick)
 
