@@ -335,6 +335,10 @@ function winner() {
   }
 }
 
+function handleWin(){
+  
+}
+
 function alertStart(){
   alert("Please enter player names and click 'Start Game'")
 }
