@@ -143,7 +143,7 @@ const setPlayers =(e)=>{
     }else if(randomNumber%2===0){
         const player1Turn = document.createElement('p')
         player1Turn.setAttribute('class', 'player-turn');
-        player1Turn.innerHTML = `It is ${state.players[0].name}'s turn.`;
+        player1Turn.innerText = `It is ${state.players[0].name}'s turn.`;
         state.players[0].isTurn = true
         state.players[1].isTurn = false
         body.appendChild(player1Turn)
@@ -151,7 +151,7 @@ const setPlayers =(e)=>{
     }else{
         const player2Turn = document.createElement('p')
         player2Turn.setAttribute('class', 'player-turn');
-        player2Turn.innerHTML = `It is ${state.players[1].name}'s turn.`;
+        player2Turn.innerText = `It is ${state.players[1].name}'s turn.`;
         state.players[0].isTurn = false
         state.players[1].isTurn = true
         body.appendChild(player2Turn)
@@ -169,19 +169,13 @@ const setPlayers =(e)=>{
     startGame.remove()
     state.game.isGameStarted=true
     
-
-    // playerBox.appendChild(playerOneName);
-    
-    
-
-
-    console.log(state.players)
-
 }
 
 const winConditions =() =>{
     
 }
+
+
 
 const playerClick = (e) => {
     if(state.game.isGameStarted===false){
@@ -196,7 +190,7 @@ const playerClick = (e) => {
         // store the integer value above in a new variable that can be changed to let us know how many marbles were taken from the clicked pit.
         let valueChange = clickedValue
         // if the clicked idx number is less than or equal to 6, we need to iterate backwards since the game is played counter clockwise 
-        if(clickedIdx<=6){
+        if(clickedIdx<=6 && state.players[0].isTurn===true){
             for(let i = clickedIdx; i>=0; i--){
                 // set the value of state.board at the clicked index to 0 and also set the innerText of that index to 0
                 if(state.board[i].index===clickedIdx){
@@ -254,9 +248,14 @@ const playerClick = (e) => {
                     }
                 }
             }
+            state.players[1].isTurn=true
+            state.players[0].isTurn=false
+            const playerTurnDisplay = document.querySelector(".player-turn")
+            console.log(state.players)
+            playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
         }
         // if the pit that is clicked is one of the bottom pits, loop counter clockwise and place marbles into pits(same pattern as above but starting at bottom of board)  
-        if(clickedIdx>=7){
+        if(clickedIdx>=7 && state.players[1].isTurn===true){
             for(let i = clickedIdx; i<=13; i++){
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
@@ -306,6 +305,12 @@ const playerClick = (e) => {
                     }
                 }
             }
+
+            state.players[0].isTurn=true
+            state.players[1].isTurn=false
+            const playerTurnDisplay = document.querySelector(".player-turn")
+console.log(state.players)
+            playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
         }  
     }
 }
