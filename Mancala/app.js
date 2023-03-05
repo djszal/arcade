@@ -35,7 +35,9 @@ function buildInitialState(){
     state.players= [
         {name: null, score: 0, isTurn: false},
         {name: null, score: 0, isTurn: false}]
-    console.log(state.players)
+    state.game=
+        {isGameStarted: false}
+    
 
     title.textContent = 'Mancala'
     body.appendChild(title)
@@ -165,6 +167,8 @@ const setPlayers =(e)=>{
     inputFields[0].replaceWith(playerOneName)
     inputFields[1].replaceWith(playerTwoName)
     startGame.remove()
+    state.game.isGameStarted=true
+    
 
     // playerBox.appendChild(playerOneName);
     
@@ -180,6 +184,9 @@ const winConditions =() =>{
 }
 
 const playerClick = (e) => {
+    if(state.game.isGameStarted===false){
+        return
+    }
     // Do noting if player clicks on the ends of the board, otherwise, run the following
     if (e.target.className !== "endCaps"){
         // Store the index number into the variable below
