@@ -8,7 +8,9 @@ title.setAttribute('class', 'title');
 
 const boardBox = document.createElement('div');
 boardBox.setAttribute('class', 'board-box');
+const playerBox = document.createElement('div');
 
+let randomNumber = Math.floor(Math.random() * 100) + 1;
 
 
 function buildInitialState(){
@@ -31,24 +33,24 @@ function buildInitialState(){
 
     state.stores = [state.board[0],state.board[13]]
     state.players= [
-        {name:null,score:0},
-        {name:null,score:0}]
+        {name: null, score: 0, isTurn: false},
+        {name: null, score: 0, isTurn: false}]
     console.log(state.players)
 
     title.textContent = 'Mancala'
     body.appendChild(title)
 
+
     
 }
 
 function renderPlayerBox(){
-    const playerBox = document.createElement('div');
     playerBox.setAttribute("class", "player-box"); 
     body.appendChild(playerBox)
 
     const playerOne = document.createElement('h3');
     playerOne.setAttribute('class', 'players');
-    playerOne.textContent = 'Player One:';
+    playerOne.textContent = 'Player One: ';
     playerBox.appendChild(playerOne);
 
     const playerOneInput = document.createElement('input')
@@ -60,7 +62,7 @@ function renderPlayerBox(){
 
     const playerTwo = document.createElement('h3');
     playerTwo.setAttribute('class', 'players');
-    playerTwo.textContent = 'Player Two:';
+    playerTwo.textContent = 'Player Two: ';
     playerBox.appendChild(playerTwo);
 
     const playerTwoInput = document.createElement('input')
@@ -120,14 +122,57 @@ const mancalaBoard = document.querySelector(".board-box")
 const startGame = document.querySelector(".button")
 const allPlayerBoxes = document.querySelectorAll(".box");
 const allEndCaps = document.querySelectorAll(".endCaps");
+const player1Input = document.querySelector("input[name=player1]");
+const player2Input = document.querySelector("input[name=player2]");
+const inputFields = document.querySelectorAll(".input")
+
+console.log(inputFields)
 
 
 const setPlayers =(e)=>{
-    const player1Input = document.querySelector("input[name=player1]");
     const player1Value = player1Input.value;
-    const player2Input = document.querySelector("input[name=player2]");
     const player2Value = player2Input.value;
-  
+    state.players[0].name = player1Value
+    state.players[1].name = player2Value
+    
+    if(!state.players[0].name && !state.players[1].name){
+        alert("Please enter player names before clicking 'Play Game'")
+        return
+    }else if(randomNumber%2===0){
+        const player1Turn = document.createElement('p')
+        player1Turn.setAttribute('class', 'player-turn');
+        player1Turn.innerHTML = `It is ${state.players[0].name}'s turn.`;
+        state.players[0].isTurn = true
+        state.players[1].isTurn = false
+        body.appendChild(player1Turn)
+        
+    }else{
+        const player2Turn = document.createElement('p')
+        player2Turn.setAttribute('class', 'player-turn');
+        player2Turn.innerHTML = `It is ${state.players[1].name}'s turn.`;
+        state.players[0].isTurn = false
+        state.players[1].isTurn = true
+        body.appendChild(player2Turn)
+    }
+    const playerOneName = document.createElement('h3')
+    playerOneName.setAttribute('class', 'player-name');
+    playerOneName.innerText=`\u00A0${state.players[0].name}`;
+    
+    const playerTwoName = document.createElement('h3')
+    playerTwoName.setAttribute('class', 'player-name');
+    playerTwoName.innerText=`\u00A0${state.players[1].name}`;
+    
+    inputFields[0].replaceWith(playerOneName)
+    inputFields[1].replaceWith(playerTwoName)
+    startGame.remove()
+
+    // playerBox.appendChild(playerOneName);
+    
+    
+
+
+    console.log(state.players)
+
 }
 
 const winConditions =() =>{
