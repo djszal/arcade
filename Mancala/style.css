@@ -37,3 +37,8 @@ margin-top: 50px;
 .endCaps{
     padding: 50px;
 }
+
+.player-turn{
+    display: flex;
+    justify-content: center;
+}

@@ -128,7 +128,7 @@ const player1Input = document.querySelector("input[name=player1]");
 const player2Input = document.querySelector("input[name=player2]");
 const inputFields = document.querySelectorAll(".input")
 
-console.log(inputFields)
+// console.log(inputFields)
 
 
 const setPlayers =(e)=>{
@@ -146,6 +146,7 @@ const setPlayers =(e)=>{
         player1Turn.innerText = `It is ${state.players[0].name}'s turn.`;
         state.players[0].isTurn = true
         state.players[1].isTurn = false
+        console.log(state.players)
         body.appendChild(player1Turn)
         
     }else{
@@ -154,6 +155,7 @@ const setPlayers =(e)=>{
         player2Turn.innerText = `It is ${state.players[1].name}'s turn.`;
         state.players[0].isTurn = false
         state.players[1].isTurn = true
+        console.log(state.players)
         body.appendChild(player2Turn)
     }
     const playerOneName = document.createElement('h3')
@@ -199,6 +201,10 @@ const playerClick = (e) => {
                     continue
                 // check to see if the valueChange variable is 0 so that we can stop the loop. 
                 }else if(valueChange === 0){
+                    state.players[0].isTurn=false
+                    state.players[1].isTurn=true
+                    const playerTurnDisplay = document.querySelector(".player-turn")
+                    playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
                     break
                     // if i!=== the clicked pit and our marbles stored in valueChange is not 0
                 }else{
@@ -212,6 +218,10 @@ const playerClick = (e) => {
                             if(valueChange>0){
                                 for(let j = 7; j<state.board.length; j++){
                                     if(valueChange===0){
+                                        state.players[0].isTurn=false
+                                        state.players[1].isTurn=true
+                                        const playerTurnDisplay = document.querySelector(".player-turn")
+                                        playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
                                         return
                                     }else if(j!==13){
                                         state.board[j].value+=1
@@ -226,6 +236,10 @@ const playerClick = (e) => {
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
                                                 if(valueChange===0){
+                                                    state.players[0].isTurn=false
+                                                    state.players[1].isTurn=true
+                                                    const playerTurnDisplay = document.querySelector(".player-turn")
+                                                    playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
                                                     return
                                                 }else if(k!==0){
                                                     state.board[k].value+=1
@@ -248,11 +262,11 @@ const playerClick = (e) => {
                     }
                 }
             }
-            state.players[1].isTurn=true
-            state.players[0].isTurn=false
-            const playerTurnDisplay = document.querySelector(".player-turn")
-            console.log(state.players)
-            playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
+            // state.players[1].isTurn=true
+            // state.players[0].isTurn=false
+            // const playerTurnDisplay = document.querySelector(".player-turn")
+            // console.log(state.players)
+            // playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
         }
         // if the pit that is clicked is one of the bottom pits, loop counter clockwise and place marbles into pits(same pattern as above but starting at bottom of board)  
         if(clickedIdx>=7 && state.players[1].isTurn===true){
@@ -262,6 +276,10 @@ const playerClick = (e) => {
                     e.target.innerText = 0
                     continue
                 }else if(valueChange === 0){
+                    state.players[0].isTurn=true
+                    state.players[1].isTurn=false
+                    const playerTurnDisplay = document.querySelector(".player-turn")
+                    playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
                     break
                 }else{
                     state.board[i].value+=1
@@ -271,6 +289,10 @@ const playerClick = (e) => {
                             if(valueChange>0){
                                 for(let j = 6; j>=0; j--){
                                     if(valueChange===0){
+                                        state.players[0].isTurn=true
+                                        state.players[1].isTurn=false
+                                        const playerTurnDisplay = document.querySelector(".player-turn")
+                                        playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
                                         return
                                     }else if(j!==0){
                                         state.board[j].value+=1
@@ -283,6 +305,10 @@ const playerClick = (e) => {
                                         if(valueChange>=1 && j===0){
                                             for(let k = 7; k<=state.board.length; k++){
                                                 if(valueChange===0){
+                                                    state.players[0].isTurn=true
+                                                    state.players[1].isTurn=false
+                                                    const playerTurnDisplay = document.querySelector(".player-turn")
+                                                    playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
                                                     return
                                                 }else if(k!==13){
                                                     state.board[k].value+=1
@@ -306,11 +332,11 @@ const playerClick = (e) => {
                 }
             }
 
-            state.players[0].isTurn=true
-            state.players[1].isTurn=false
-            const playerTurnDisplay = document.querySelector(".player-turn")
-console.log(state.players)
-            playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
+//             state.players[0].isTurn=true
+//             state.players[1].isTurn=false
+//             const playerTurnDisplay = document.querySelector(".player-turn")
+// console.log(state.players)
+//             playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
         }  
     }
 }
