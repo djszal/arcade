@@ -10,7 +10,8 @@ const boardBox = document.createElement('div');
 boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
 
-let randomNumber = Math.floor(Math.random() * 100) + 1;
+// let randomNumber = Math.floor(Math.random() * 100) + 1;
+let randomNumber = 3;
 
 
 function buildInitialState(){
@@ -177,7 +178,20 @@ const winConditions =() =>{
     
 }
 
+const changePlayer1Turn = () =>{
+    state.players[0].isTurn=false
+    state.players[1].isTurn=true
+    const playerTurnDisplay = document.querySelector(".player-turn")
+    playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
+}
 
+const changePlayer2Turn = () => {
+    state.players[0].isTurn=true
+    state.players[1].isTurn=false
+    const playerTurnDisplay = document.querySelector(".player-turn")
+    playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
+
+}
 
 const playerClick = (e) => {
     if(state.game.isGameStarted===false){
@@ -198,14 +212,13 @@ const playerClick = (e) => {
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
-                    continue
+                    console.log("AAA",valueChange)
+                    
                 // check to see if the valueChange variable is 0 so that we can stop the loop. 
                 }else if(valueChange === 0){
-                    state.players[0].isTurn=false
-                    state.players[1].isTurn=true
-                    const playerTurnDisplay = document.querySelector(".player-turn")
-                    playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
-                    break
+                    changePlayer1Turn();
+                    console.log("BBB",valueChange)
+                    return
                     // if i!=== the clicked pit and our marbles stored in valueChange is not 0
                 }else{
                     // add 1 marble to state.board value at each put at i 
@@ -214,32 +227,28 @@ const playerClick = (e) => {
                     if(valueChange>=1 && i===0){
                             allEndCaps[0].innerText=state.board[0].value
                             valueChange-=1
+                            console.log("CCC",valueChange)
+
                             // if valueChange is not 0 (still marbles to move), loop through the bottom board pits and insert marble until there are none left.  
                             if(valueChange>0){
                                 for(let j = 7; j<state.board.length; j++){
-                                    if(valueChange===0){
-                                        state.players[0].isTurn=false
-                                        state.players[1].isTurn=true
-                                        const playerTurnDisplay = document.querySelector(".player-turn")
-                                        playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
-                                        return
-                                    }else if(j!==13){
+                                    if(j!==13){
                                         state.board[j].value+=1
-                                    allPlayerBoxes[j-1].innerText=state.board[j].value
-                                    valueChange-=1
-                                }else if(j===13){
+                                        allPlayerBoxes[j-1].innerText=state.board[j].value
+                                        valueChange-=1
+                                        if(valueChange===0){
+                                            changePlayer1Turn();
+                                            return
+                                        }
+                                    }else if(j===13){
                                         state.board[j].value+=1
                                         allEndCaps[1].innerText=state.board[13].value
                                         valueChange-=1
-                                        console.log(state.board[13])
                                         // If there are still marbles left to place, loop through the top pits of the board again and place a marble until valueChange===0
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
                                                 if(valueChange===0){
-                                                    state.players[0].isTurn=false
-                                                    state.players[1].isTurn=true
-                                                    const playerTurnDisplay = document.querySelector(".player-turn")
-                                                    playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
+                                                    changePlayer1Turn();
                                                     return
                                                 }else if(k!==0){
                                                     state.board[k].value+=1
@@ -248,38 +257,41 @@ const playerClick = (e) => {
                                                 }else if(k===0){
                                                 allEndCaps[0].innerText=state.board[0].value
                                                 valueChange-=1
+                                                }
                                             }
+                                        }else{
+                                            changePlayer1Turn();
+                                            return
                                         }
                                     }
                                 }
+                            }else{
+                                changePlayer1Turn();
+                                console.log("XXX",valueChange)
+                                return
                             }
-                        }
                     }else if(i>0){
                         // allPlayersBoxes is one index above the index for state.board. set the value for state.board to the inner text of each pit on the board
                         allPlayerBoxes[i-1].innerText=state.board[i].value
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
                         valueChange-=1
+                        if(valueChange===0){
+                            changePlayer1Turn();
+                            console.log("XXX",valueChange)
+                            return
+                        }
+
                     }
                 }
             }
-            // state.players[1].isTurn=true
-            // state.players[0].isTurn=false
-            // const playerTurnDisplay = document.querySelector(".player-turn")
-            // console.log(state.players)
-            // playerTurnDisplay.innerText=`It is ${state.players[1].name}'s turn.`
-        }
-        // if the pit that is clicked is one of the bottom pits, loop counter clockwise and place marbles into pits(same pattern as above but starting at bottom of board)  
-        if(clickedIdx>=7 && state.players[1].isTurn===true){
+            // if the pit that is clicked is one of the bottom pits, loop counter clockwise and place marbles into pits(same pattern as above but starting at bottom of board)  
+        }if(clickedIdx>=7 && state.players[1].isTurn===true){
             for(let i = clickedIdx; i<=13; i++){
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
-                    continue
                 }else if(valueChange === 0){
-                    state.players[0].isTurn=true
-                    state.players[1].isTurn=false
-                    const playerTurnDisplay = document.querySelector(".player-turn")
-                    playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
+                   changePlayer2Turn();
                     break
                 }else{
                     state.board[i].value+=1
@@ -289,10 +301,7 @@ const playerClick = (e) => {
                             if(valueChange>0){
                                 for(let j = 6; j>=0; j--){
                                     if(valueChange===0){
-                                        state.players[0].isTurn=true
-                                        state.players[1].isTurn=false
-                                        const playerTurnDisplay = document.querySelector(".player-turn")
-                                        playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
+                                        changePlayer2Turn();
                                         return
                                     }else if(j!==0){
                                         state.board[j].value+=1
@@ -305,10 +314,7 @@ const playerClick = (e) => {
                                         if(valueChange>=1 && j===0){
                                             for(let k = 7; k<=state.board.length; k++){
                                                 if(valueChange===0){
-                                                    state.players[0].isTurn=true
-                                                    state.players[1].isTurn=false
-                                                    const playerTurnDisplay = document.querySelector(".player-turn")
-                                                    playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
+                                                    changePlayer2Turn();
                                                     return
                                                 }else if(k!==13){
                                                     state.board[k].value+=1
@@ -319,24 +325,30 @@ const playerClick = (e) => {
                                                 valueChange-=1
                                             }
                                         }
-                                    }
+                                    }else{
+                                        changePlayer1Turn();
+                                        return
+                                }
                                 }
                             }
-                        }
+                        }else{
+                            changePlayer1Turn();
+                        console.log("XXX",valueChange)
+                        return
+                    }
                     }else if(i>0){
                         // allPlayersBoxes is one index above the index for state.board. set the value for state.board to the inner text of each pit on the board
                         allPlayerBoxes[i-1].innerText=state.board[i].value
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
                         valueChange-=1
+                        if(valueChange===0){
+                            changePlayer1Turn();
+                        console.log("XXX",valueChange)
+                        return
+                        }
                     }
                 }
             }
-
-//             state.players[0].isTurn=true
-//             state.players[1].isTurn=false
-//             const playerTurnDisplay = document.querySelector(".player-turn")
-// console.log(state.players)
-//             playerTurnDisplay.innerText=`It is ${state.players[0].name}'s turn.`
         }  
     }
 }
