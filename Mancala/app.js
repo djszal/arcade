@@ -213,7 +213,7 @@ const playerClick = (e) => {
         // store the integer value above in a new variable that can be changed to let us know how many marbles were taken from the clicked pit.
         let valueChange = clickedValue
         // if the clicked idx number is less than or equal to 6, we need to iterate backwards since the game is played counter clockwise 
-        if(clickedIdx<=6 && state.players[0].isTurn===true){
+        if(clickedIdx<=6 && state.players[0].isTurn===true && clickedValue!==0 ){
             for(let i = clickedIdx; i>=0; i--){
                 // set the value of state.board at the clicked index to 0 and also set the innerText of that index to 0
                 if(state.board[i].index===clickedIdx){
@@ -292,7 +292,7 @@ const playerClick = (e) => {
                 }
             }
             // if the pit that is clicked is one of the bottom pits, loop counter clockwise and place marbles into pits(same pattern as above but starting at bottom of board)  
-        }if(clickedIdx>=7 && state.players[1].isTurn===true){
+        }if(clickedIdx>=7 && state.players[1].isTurn===true && clickedValue!==0){
             for(let i = clickedIdx; i<=13; i++){
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
