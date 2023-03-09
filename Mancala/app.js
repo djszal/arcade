@@ -128,6 +128,7 @@ const allEndCaps = document.querySelectorAll(".endCaps");
 const player1Input = document.querySelector("input[name=player1]");
 const player2Input = document.querySelector("input[name=player2]");
 const inputFields = document.querySelectorAll(".input")
+const playerNameBox = document.querySelector(".player-box")
 
 // console.log(inputFields)
 
@@ -135,11 +136,14 @@ const inputFields = document.querySelectorAll(".input")
 const setPlayers =(e)=>{
     const player1Value = player1Input.value;
     const player2Value = player2Input.value;
+    const nameInputError = document.createElement('h3')
+    nameInputError.setAttribute('class', 'error');
+    nameInputError.textContent = "Please enter both player names before clicking Play Game";
     state.players[0].name = player1Value
     state.players[1].name = player2Value
     
-    if(!state.players[0].name && !state.players[1].name){
-        alert("Please enter player names before clicking 'Play Game'")
+    if(!state.players[0].name || !state.players[1].name){
+        body.appendChild(nameInputError)
         return
     }else if(randomNumber%2===0){
         const player1Turn = document.createElement('p')
@@ -171,6 +175,9 @@ const setPlayers =(e)=>{
     inputFields[1].replaceWith(playerTwoName)
     startGame.remove()
     state.game.isGameStarted=true
+    
+    const inputError = document.querySelector(".error")
+    inputError.remove()
     
 }
 
@@ -300,13 +307,14 @@ const playerClick = (e) => {
                             valueChange-=1
                             if(valueChange>0){
                                 for(let j = 6; j>=0; j--){
-                                    if(valueChange===0){
-                                        changePlayer2Turn();
-                                        return
-                                    }else if(j!==0){
+                                    if(j!==0){
                                         state.board[j].value+=1
-                                    allPlayerBoxes[j-1].innerText=state.board[j].value
-                                    valueChange-=1
+                                        allPlayerBoxes[j-1].innerText=state.board[j].value
+                                        valueChange-=1
+                                        if(valueChange===0){
+                                            changePlayer2Turn();
+                                            return
+                                        }
                                 }else if(j===0){
                                         state.board[j].value+=1
                                         allEndCaps[1].innerText=state.board[0].value
@@ -333,8 +341,8 @@ const playerClick = (e) => {
                             }
                         }else{
                             changePlayer1Turn();
-                        console.log("XXX",valueChange)
-                        return
+                            console.log("XXX",valueChange)
+                            return
                     }
                     }else if(i>0){
                         // allPlayersBoxes is one index above the index for state.board. set the value for state.board to the inner text of each pit on the board
