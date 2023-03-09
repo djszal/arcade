@@ -213,18 +213,17 @@ const playerClick = (e) => {
         // store the integer value above in a new variable that can be changed to let us know how many marbles were taken from the clicked pit.
         let valueChange = clickedValue
         // if the clicked idx number is less than or equal to 6, we need to iterate backwards since the game is played counter clockwise 
+
         if(clickedIdx<=6 && state.players[0].isTurn===true && clickedValue!==0 ){
             for(let i = clickedIdx; i>=0; i--){
                 // set the value of state.board at the clicked index to 0 and also set the innerText of that index to 0
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
-                    console.log("AAA",valueChange)
                     
                 // check to see if the valueChange variable is 0 so that we can stop the loop. 
                 }else if(valueChange === 0){
                     changePlayer1Turn();
-                    console.log("BBB",valueChange)
                     return
                     // if i!=== the clicked pit and our marbles stored in valueChange is not 0
                 }else{
@@ -234,7 +233,6 @@ const playerClick = (e) => {
                     if(valueChange>=1 && i===0){
                             allEndCaps[0].innerText=state.board[0].value
                             valueChange-=1
-                            console.log("CCC",valueChange)
 
                             // if valueChange is not 0 (still marbles to move), loop through the bottom board pits and insert marble until there are none left.  
                             if(valueChange>0){
@@ -274,7 +272,6 @@ const playerClick = (e) => {
                                 }
                             }else{
                                 changePlayer1Turn();
-                                console.log("XXX",valueChange)
                                 return
                             }
                     }else if(i>0){
@@ -284,7 +281,6 @@ const playerClick = (e) => {
                         valueChange-=1
                         if(valueChange===0){
                             changePlayer1Turn();
-                            console.log("XXX",valueChange)
                             return
                         }
 
@@ -341,7 +337,6 @@ const playerClick = (e) => {
                             }
                         }else{
                             changePlayer1Turn();
-                            console.log("XXX",valueChange)
                             return
                     }
                     }else if(i>0){
@@ -350,8 +345,7 @@ const playerClick = (e) => {
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
                         valueChange-=1
                         if(valueChange===0){
-                            changePlayer1Turn();
-                        console.log("XXX",valueChange)
+                            changePlayer2Turn();
                         return
                         }
                     }
