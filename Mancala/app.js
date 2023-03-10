@@ -10,8 +10,8 @@ const boardBox = document.createElement('div');
 boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
 
-// let randomNumber = Math.floor(Math.random() * 100) + 1;
-let randomNumber = 3;
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+// let randomNumber = 3;
 
 
 function buildInitialState(){
@@ -246,9 +246,9 @@ const playerClick = (e) => {
                                             return
                                         }
                                     }else if(j===13){
-                                        state.board[j].value+=1
-                                        allEndCaps[1].innerText=state.board[13].value
-                                        valueChange-=1
+                                        // state.board[j].value+=1
+                                        // allEndCaps[1].innerText=state.board[13].value
+                                        // valueChange-=1
                                         // If there are still marbles left to place, loop through the top pits of the board again and place a marble until valueChange===0
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
@@ -312,9 +312,9 @@ const playerClick = (e) => {
                                             return
                                         }
                                 }else if(j===0){
-                                        state.board[j].value+=1
-                                        allEndCaps[1].innerText=state.board[0].value
-                                        valueChange-=1
+                                        // state.board[j].value+=1
+                                        // allEndCaps[1].innerText=state.board[0].value
+                                        // valueChange-=1
                                         if(valueChange>=1 && j===0){
                                             for(let k = 7; k<=state.board.length; k++){
                                                 if(valueChange===0){
@@ -332,7 +332,7 @@ const playerClick = (e) => {
                                     }else{
                                         changePlayer1Turn();
                                         return
-                                }
+                                    }
                                 }
                             }
                         }else{
