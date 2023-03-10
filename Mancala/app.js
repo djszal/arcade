@@ -37,7 +37,9 @@ function buildInitialState(){
         {name: null, score: 0, isTurn: false},
         {name: null, score: 0, isTurn: false}]
     state.game=
-        {isGameStarted: false}
+        {isGameStarted: false,
+        error: false
+        }
     
 
     title.textContent = 'Mancala'
@@ -143,7 +145,8 @@ const setPlayers =(e)=>{
     state.players[1].name = player2Value
     
     if(!state.players[0].name || !state.players[1].name){
-        body.appendChild(nameInputError)
+        body.appendChild(nameInputError);
+        state.game.error = true;
         return
     }else if(randomNumber%2===0){
         const player1Turn = document.createElement('p')
@@ -175,9 +178,11 @@ const setPlayers =(e)=>{
     inputFields[1].replaceWith(playerTwoName)
     startGame.remove()
     state.game.isGameStarted=true
+    if(state.game.error===true){
+        const inputError = document.querySelector(".error")
+        inputError.remove()
+    }
     
-    const inputError = document.querySelector(".error")
-    inputError.remove()
     
 }
 
