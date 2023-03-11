@@ -187,6 +187,12 @@ const setPlayers =(e)=>{
 }
 
 const winConditions =() =>{
+    plyrOneWin = []
+    for(let i=1; i<=6; i++ ){
+        if(state.board[i].value===0){
+
+        }
+    }
     
 }
 
