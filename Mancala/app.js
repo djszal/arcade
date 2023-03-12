@@ -10,20 +10,20 @@ const boardBox = document.createElement('div');
 boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
 
-let randomNumber = Math.floor(Math.random() * 100) + 1;
-// let randomNumber = 3;
+// let randomNumber = Math.floor(Math.random() * 100) + 1;
+let randomNumber = 2;
 
 
 function buildInitialState(){
     
     state.board = [
         {index:0, value:0, name:'Player One Store'},
-        {index:1, value:4, name:'Player One Pit'},
+        {index:1, value:8, name:'Player One Pit'}, 
         {index:2, value:4, name:'Player One Pit'},
         {index:3, value:4, name:'Player One Pit'},
         {index:4, value:4, name:'Player One Pit'},
         {index:5, value:4, name:'Player One Pit'},
-        {index:6, value:4, name:'Player One Pit'},
+        {index:6, value:0, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -257,13 +257,24 @@ const playerClick = (e) => {
                                             return
                                         }
                                     }else if(j===13){
-                                        // state.board[j].value+=1
-                                        // allEndCaps[1].innerText=state.board[13].value
-                                        // valueChange-=1
                                         // If there are still marbles left to place, loop through the top pits of the board again and place a marble until valueChange===0
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
-                                                if(valueChange===0){
+// ###################################################################################### WORK ON THIS BELOW ##################################### 
+                                                if(i<=6 && state.board[i].value === 1 && state.board[i+6].value>=1){
+                                                    console.log("HELLO DYLAN")
+                                                    state.board[i].value=0
+                                                    allPlayerBoxes[i].innerText=state.board[i].value
+                        
+                                                    state.board[0].value+=state.board[i+6].value 
+                                                    allEndCaps[0].innerText=state.board[0].value
+                        
+                                                    state.board[i+6].value = 0
+                                                    allPlayerBoxes[i+6].innerText=state.board[i+6].value
+                        
+                        
+                                                }
+                                                else if(valueChange===0){
                                                     changePlayer1Turn();
                                                     return
                                                 }else if(k!==0){
@@ -286,10 +297,23 @@ const playerClick = (e) => {
                                 return
                             }
                     }else if(i>0){
+                        console.log("LLLL",i)
                         // allPlayersBoxes is one index above the index for state.board. set the value for state.board to the inner text of each pit on the board
                         allPlayerBoxes[i-1].innerText=state.board[i].value
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
                         valueChange-=1
+                        // if(i<=6 && state.board[i].value === 1 && state.board[i+6].value>=1){
+                        //     state.board[i].value=0
+                        //     allPlayerBoxes[i].innerText=state.board[i].value
+
+                        //     state.board[0].value+=state.board[i+6].value +1
+                        //     allEndCaps[0].innerText=state.board[0].value
+
+                        //     state.board[i+6].value = 0
+                        //     allPlayerBoxes[i+6].innerText=state.board[i+6].value
+
+
+                        // }
                         if(valueChange===0){
                             changePlayer1Turn();
                             return
