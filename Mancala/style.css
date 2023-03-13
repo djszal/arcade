@@ -10,6 +10,11 @@
     justify-content: center;
 }
 
+.score-box{
+    display: flex;
+    justify-content: center;
+}
+
 .board-box{
 border: solid black;
 display: flex;

@@ -9,6 +9,7 @@ title.setAttribute('class', 'title');
 const boardBox = document.createElement('div');
 boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
+const scoreBox = document.createElement('div');
 
 // let randomNumber = Math.floor(Math.random() * 100) + 1;
 let randomNumber = 2;
@@ -52,6 +53,9 @@ function buildInitialState(){
 function renderPlayerBox(){
     playerBox.setAttribute("class", "player-box"); 
     body.appendChild(playerBox)
+    
+    scoreBox.setAttribute("class", "score-box"); 
+    body.appendChild(scoreBox)
 
     const playerOne = document.createElement('h3');
     playerOne.setAttribute('class', 'players');
@@ -135,7 +139,7 @@ const playerNameBox = document.querySelector(".player-box")
 // console.log(inputFields)
 
 
-const setPlayers =(e)=>{
+const setPlayers =()=>{
     const player1Value = player1Input.value;
     const player2Value = player2Input.value;
     const nameInputError = document.createElement('h3')
@@ -143,6 +147,11 @@ const setPlayers =(e)=>{
     nameInputError.textContent = "Please enter both player names before clicking Play Game";
     state.players[0].name = player1Value
     state.players[1].name = player2Value
+
+    const scoreTitle = document.createElement('h3');
+    scoreTitle.setAttribute('class', 'score-title');
+    scoreTitle.textContent = 'Score: ';
+    scoreBox.appendChild(scoreTitle);
     
     if(!state.players[0].name || !state.players[1].name){
         body.appendChild(nameInputError);
