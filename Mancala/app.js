@@ -182,6 +182,16 @@ const setPlayers =()=>{
     const playerTwoName = document.createElement('h3')
     playerTwoName.setAttribute('class', 'player-name');
     playerTwoName.innerText=`\u00A0${state.players[1].name}`;
+
+    const playerOneScore = document.createElement('h3')
+    playerOneScore.setAttribute('class', 'player-score');
+    playerOneScore.innerText=`\u00A0${state.players[0].score}`;
+    scoreBox.appendChild(playerOneScore);
+    
+    const playerTwoScore = document.createElement('h3')
+    playerTwoScore.setAttribute('class', 'player-score');
+    playerTwoScore.innerText=`\u00A0${state.players[1].score}`;
+    scoreBox.appendChild(playerTwoScore);
     
     inputFields[0].replaceWith(playerOneName)
     inputFields[1].replaceWith(playerTwoName)
