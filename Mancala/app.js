@@ -212,6 +212,12 @@ const winConditions =() =>{
 
         }
     }
+
+    const playAgainButton = document.createElement('button');
+    playAgainButton.setAttribute('type', 'button');
+    playAgainButton.setAttribute('class', 'button');
+    playAgainButton.textContent = 'Play Again?';
+    body.appendChild(playAgainButton);
     
 }
 
