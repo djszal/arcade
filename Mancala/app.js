@@ -11,20 +11,20 @@ boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
 const scoreBox = document.createElement('div');
 
-// let randomNumber = Math.floor(Math.random() * 100) + 1;
-let randomNumber = 2;
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+// let randomNumber = 2;
 
 
 function buildInitialState(){
     
     state.board = [
         {index:0, value:0, name:'Player One Store'},
-        {index:1, value:8, name:'Player One Pit'}, 
+        {index:1, value:4, name:'Player One Pit'}, 
         {index:2, value:4, name:'Player One Pit'},
         {index:3, value:4, name:'Player One Pit'},
         {index:4, value:4, name:'Player One Pit'},
         {index:5, value:4, name:'Player One Pit'},
-        {index:6, value:0, name:'Player One Pit'},
+        {index:6, value:4, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -285,18 +285,20 @@ const playerClick = (e) => {
                                         // If there are still marbles left to place, loop through the top pits of the board again and place a marble until valueChange===0
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
+                                                console.log("AA",k)
+                                                console.log("BB",state.board[k].value)
 // ###################################################################################### WORK ON THIS BELOW ##################################### 
-                                                if(i<=6 && state.board[i].value === 1 && state.board[i+6].value>=1){
-                                                    console.log("HELLO DYLAN")
-                                                    state.board[i].value=0
-                                                    allPlayerBoxes[i].innerText=state.board[i].value
-                        
-                                                    state.board[0].value+=state.board[i+6].value 
+                                                if(k<=6 && state.board[k].value === 0 && state.board[k+6].value>=1){
+                                                  
+                                                    state.board[k].value=0
+                                                    allPlayerBoxes[k-1].innerText=state.board[k].value
+                                                    // add captured bin value to the value in the player's store
+                                                    state.board[0].value+=state.board[k+6].value 
                                                     allEndCaps[0].innerText=state.board[0].value
                         
-                                                    state.board[i+6].value = 0
-                                                    allPlayerBoxes[i+6].innerText=state.board[i+6].value
-                        
+                                                    state.board[k+6].value = 0
+                                                    allPlayerBoxes[k+5].innerText=state.board[k+6].value
+                                                    valueChange-=1
                         
                                                 }
                                                 else if(valueChange===0){
