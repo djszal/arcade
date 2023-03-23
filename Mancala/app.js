@@ -11,8 +11,8 @@ boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
 const scoreBox = document.createElement('div');
 
-// let randomNumber = Math.floor(Math.random() * 100) + 1;
-let randomNumber = 3;
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+// let randomNumber = 3;
 
 
 function buildInitialState(){
