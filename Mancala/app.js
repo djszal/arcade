@@ -11,8 +11,8 @@ boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
 const scoreBox = document.createElement('div');
 
-let randomNumber = Math.floor(Math.random() * 100) + 1;
-// let randomNumber = 2;
+// let randomNumber = Math.floor(Math.random() * 100) + 1;
+let randomNumber = 3;
 
 
 function buildInitialState(){
@@ -357,7 +357,7 @@ const playerClick = (e) => {
                     e.target.innerText = 0
                 }else if(valueChange === 0){
                    changePlayer2Turn();
-                    break
+                   break
                 }else{
                     state.board[i].value+=1
                     if(valueChange>=1 && i===13){
@@ -374,9 +374,6 @@ const playerClick = (e) => {
                                             return
                                         }
                                 }else if(j===0){
-                                        // state.board[j].value+=1
-                                        // allEndCaps[1].innerText=state.board[0].value
-                                        // valueChange-=1
                                         if(valueChange>=1 && j===0){
                                             for(let k = 7; k<=state.board.length; k++){
                                                 if(valueChange===0){
@@ -398,7 +395,7 @@ const playerClick = (e) => {
                                 }
                             }
                         }else{
-                            changePlayer1Turn();
+                            changePlayer2Turn();
                             return
                     }
                     }else if(i>0){
