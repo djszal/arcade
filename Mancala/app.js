@@ -163,7 +163,6 @@ const setPlayers =()=>{
         player1Turn.innerText = `It is ${state.players[0].name}'s turn.`;
         state.players[0].isTurn = true
         state.players[1].isTurn = false
-        console.log(state.players)
         body.appendChild(player1Turn)
         
     }else{
@@ -172,7 +171,6 @@ const setPlayers =()=>{
         player2Turn.innerText = `It is ${state.players[1].name}'s turn.`;
         state.players[0].isTurn = false
         state.players[1].isTurn = true
-        console.log(state.players)
         body.appendChild(player2Turn)
     }
     const playerOneName = document.createElement('h3')
@@ -206,18 +204,25 @@ const setPlayers =()=>{
 }
 
 const winConditions =() =>{
-    plyrOneWin = []
+    plyrOneWin = null;
     for(let i=1; i<=6; i++ ){
+        console.log("Player One Win", plyrOneWin)
         if(state.board[i].value===0){
-
+            plyrOneWin = true
+        }else{
+            false
         }
     }
+    if(plyrOneWin===true){
+        console.log("WINNNNER")
+    }
 
-    const playAgainButton = document.createElement('button');
-    playAgainButton.setAttribute('type', 'button');
-    playAgainButton.setAttribute('class', 'button');
-    playAgainButton.textContent = 'Play Again?';
-    body.appendChild(playAgainButton);
+
+    // const playAgainButton = document.createElement('button');
+    // playAgainButton.setAttribute('type', 'button');
+    // playAgainButton.setAttribute('class', 'button');
+    // playAgainButton.textContent = 'Play Again?';
+    // body.appendChild(playAgainButton);
     
 }
 
@@ -240,6 +245,7 @@ const playerClick = (e) => {
     if(state.game.isGameStarted===false){
         return
     }
+    
     // Do noting if player clicks on the ends of the board, otherwise, run the following
     if (e.target.className !== "endCaps"){
         // Store the index number into the variable below
@@ -259,6 +265,7 @@ const playerClick = (e) => {
                     
                 // check to see if the valueChange variable is 0 so that we can stop the loop. 
                 }else if(valueChange === 0){
+                    winConditions()
                     changePlayer1Turn();
                     return
                     // if i!=== the clicked pit and our marbles stored in valueChange is not 0
