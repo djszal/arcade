@@ -136,7 +136,6 @@ const player2Input = document.querySelector("input[name=player2]");
 const inputFields = document.querySelectorAll(".input")
 const playerNameBox = document.querySelector(".player-box")
 
-// console.log(inputFields)
 
 
 const setPlayers =()=>{
@@ -203,18 +202,56 @@ const setPlayers =()=>{
     
 }
 
+
 const winConditions =() =>{
-    plyrOneWin = null;
-    for(let i=1; i<=6; i++ ){
-        console.log("Player One Win", plyrOneWin)
+    const playerWinDisplay = document.querySelector(".player-turn")
+    plyrOneWin = 0;
+    plyrTwoWin = 0;
+    for(let i=1; i<=6; i++){
         if(state.board[i].value===0){
-            plyrOneWin = true
-        }else{
-            false
+            plyrOneWin +=1
         }
     }
-    if(plyrOneWin===true){
-        console.log("WINNNNER")
+    for(let i=7; i<=12; i++){
+        if(state.board[i].value===0){
+            plyrTwoWin +=1
+        }
+    }
+    if(plyrOneWin===6){
+        let plyrOneScore = state.board[0].value
+        let plyrTwoScore = state.board[13].value
+        for(let i=7; i<=12; i++){
+            plyrTwoScore += state.board[i].value
+            }
+        state.game.isGameStarted=false;
+        if(plyrOneScore>plyrTwoScore){
+            playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
+            state.players[0].score += 1
+        }else{
+            playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
+            state.players[1].score += 1
+            console.log(state.players)
+        }
+        console.log("WINNNNER 1")
+        console.log(plyrOneScore)
+        console.log(plyrTwoScore)
+        
+    }
+    if(plyrTwoWin===6){
+        let plyrTwoScore = state.board[13].value
+        let plyrOneScore = state.board[0].value
+        for(let i=1; i<=6; i++){
+            plyrOneScore += state.board[i].value
+            }
+        state.game.isGameStarted=false
+        if(plyrTwoScore>plyrOneScore){
+            playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
+            state.players[1].score += 1
+        }else{
+            playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
+            state.players[0].score += 1
+        }
+        console.log("WINNNNER 2")
     }
 
 
@@ -242,6 +279,7 @@ const changePlayer2Turn = () => {
 }
 
 const playerClick = (e) => {
+    
     if(state.game.isGameStarted===false){
         return
     }
@@ -265,7 +303,6 @@ const playerClick = (e) => {
                     
                 // check to see if the valueChange variable is 0 so that we can stop the loop. 
                 }else if(valueChange === 0){
-                    winConditions()
                     changePlayer1Turn();
                     return
                     // if i!=== the clicked pit and our marbles stored in valueChange is not 0
@@ -331,7 +368,6 @@ const playerClick = (e) => {
                                 return
                             }
                     }else if(i>0){
-                        console.log("LLLL",i)
                         // allPlayersBoxes is one index above the index for state.board. set the value for state.board to the inner text of each pit on the board
                         allPlayerBoxes[i-1].innerText=state.board[i].value
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
@@ -418,9 +454,11 @@ const playerClick = (e) => {
                 }
             }
         }  
+        
     }
 }
 
 startGame.addEventListener("click", setPlayers)
 mancalaBoard.addEventListener("click", playerClick)
+mancalaBoard.addEventListener("click", winConditions)
 
