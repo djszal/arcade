@@ -112,16 +112,13 @@ function renderBoard(){
         k++
         box.innerText= state.board[i].value
         boxesBox.appendChild(box)
-    
 }
     const endCapTwo = document.createElement('div')
     endCapTwo.setAttribute('class', 'endCaps');
     endCapTwo.innerText = state.stores[1].value
     endCapOne.value = 13
     boardBox.appendChild(endCapTwo)
-
 }
-
 
 buildInitialState()
 renderPlayerBox()
@@ -135,8 +132,6 @@ const player1Input = document.querySelector("input[name=player1]");
 const player2Input = document.querySelector("input[name=player2]");
 const inputFields = document.querySelectorAll(".input")
 const playerNameBox = document.querySelector(".player-box")
-
-
 
 const setPlayers =()=>{
     const player1Value = player1Input.value;
@@ -194,14 +189,12 @@ const setPlayers =()=>{
     inputFields[1].replaceWith(playerTwoName)
     startGame.remove()
     state.game.isGameStarted=true
+
     if(state.game.error===true){
         const inputError = document.querySelector(".error")
         inputError.remove()
     }
-    
-    
 }
-
 
 const winConditions =() =>{
     const playerWinDisplay = document.querySelector(".player-turn")
@@ -230,12 +223,7 @@ const winConditions =() =>{
         }else{
             playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
             state.players[1].score += 1
-            console.log(state.players)
         }
-        console.log("WINNNNER 1")
-        console.log(plyrOneScore)
-        console.log(plyrTwoScore)
-        
     }
     if(plyrTwoWin===6){
         let plyrTwoScore = state.board[13].value
@@ -251,7 +239,6 @@ const winConditions =() =>{
             playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
             state.players[0].score += 1
         }
-        console.log("WINNNNER 2")
     }
 
 
@@ -300,7 +287,6 @@ const playerClick = (e) => {
                 if(state.board[i].index===clickedIdx){
                     state.board[i].value=0
                     e.target.innerText = 0
-                    
                 // check to see if the valueChange variable is 0 so that we can stop the loop. 
                 }else if(valueChange === 0){
                     changePlayer1Turn();
@@ -313,7 +299,6 @@ const playerClick = (e) => {
                     if(valueChange>=1 && i===0){
                             allEndCaps[0].innerText=state.board[0].value
                             valueChange-=1
-
                             // if valueChange is not 0 (still marbles to move), loop through the bottom board pits and insert marble until there are none left.  
                             if(valueChange>0){
                                 for(let j = 7; j<state.board.length; j++){
@@ -329,11 +314,8 @@ const playerClick = (e) => {
                                         // If there are still marbles left to place, loop through the top pits of the board again and place a marble until valueChange===0
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
-                                                console.log("AA",k)
-                                                console.log("BB",state.board[k].value)
 // ###################################################################################### WORK ON THIS BELOW ##################################### 
                                                 if(k<=6 && state.board[k].value === 0 && state.board[k+6].value>=1){
-                                                  
                                                     state.board[k].value=0
                                                     allPlayerBoxes[k-1].innerText=state.board[k].value
                                                     // add captured bin value to the value in the player's store
@@ -343,9 +325,7 @@ const playerClick = (e) => {
                                                     state.board[k+6].value = 0
                                                     allPlayerBoxes[k+5].innerText=state.board[k+6].value
                                                     valueChange-=1
-                        
-                                                }
-                                                else if(valueChange===0){
+                                                }else if(valueChange===0){
                                                     changePlayer1Turn();
                                                     return
                                                 }else if(k!==0){
@@ -372,23 +352,10 @@ const playerClick = (e) => {
                         allPlayerBoxes[i-1].innerText=state.board[i].value
                         // subctract 1 from valueChange which lets us know if we have 'used' all of the marbles from the original clicked pit.
                         valueChange-=1
-                        // if(i<=6 && state.board[i].value === 1 && state.board[i+6].value>=1){
-                        //     state.board[i].value=0
-                        //     allPlayerBoxes[i].innerText=state.board[i].value
-
-                        //     state.board[0].value+=state.board[i+6].value +1
-                        //     allEndCaps[0].innerText=state.board[0].value
-
-                        //     state.board[i+6].value = 0
-                        //     allPlayerBoxes[i+6].innerText=state.board[i+6].value
-
-
-                        // }
                         if(valueChange===0){
                             changePlayer1Turn();
                             return
                         }
-
                     }
                 }
             }
