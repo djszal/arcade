@@ -11,20 +11,20 @@ boardBox.setAttribute('class', 'board-box');
 const playerBox = document.createElement('div');
 const scoreBox = document.createElement('div');
 
-let randomNumber = Math.floor(Math.random() * 100) + 1;
-// let randomNumber = 3;
+// let randomNumber = Math.floor(Math.random() * 100) + 1;
+let randomNumber = 2;
 
 
 function buildInitialState(){
     
     state.board = [
         {index:0, value:0, name:'Player One Store'},
-        {index:1, value:4, name:'Player One Pit'}, 
-        {index:2, value:4, name:'Player One Pit'},
-        {index:3, value:4, name:'Player One Pit'},
-        {index:4, value:4, name:'Player One Pit'},
-        {index:5, value:4, name:'Player One Pit'},
-        {index:6, value:4, name:'Player One Pit'},
+        {index:1, value:1, name:'Player One Pit'}, 
+        {index:2, value:0, name:'Player One Pit'},
+        {index:3, value:0, name:'Player One Pit'},
+        {index:4, value:0, name:'Player One Pit'},
+        {index:5, value:0, name:'Player One Pit'},
+        {index:6, value:0, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -198,6 +198,8 @@ const setPlayers =()=>{
 
 const winConditions =() =>{
     const playerWinDisplay = document.querySelector(".player-turn")
+    const playerScoreUpdate = document.querySelectorAll(".player-score")
+    console.log(playerScoreUpdate)
     plyrOneWin = 0;
     plyrTwoWin = 0;
     for(let i=1; i<=6; i++){
@@ -220,9 +222,11 @@ const winConditions =() =>{
         if(plyrOneScore>plyrTwoScore){
             playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
             state.players[0].score += 1
+            playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`
         }else{
             playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
             state.players[1].score += 1
+            playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`
         }
     }
     if(plyrTwoWin===6){
@@ -235,18 +239,26 @@ const winConditions =() =>{
         if(plyrTwoScore>plyrOneScore){
             playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
             state.players[1].score += 1
+            playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`
         }else{
             playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
             state.players[0].score += 1
+            playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`
         }
     }
 
 
-    // const playAgainButton = document.createElement('button');
-    // playAgainButton.setAttribute('type', 'button');
-    // playAgainButton.setAttribute('class', 'button');
-    // playAgainButton.textContent = 'Play Again?';
-    // body.appendChild(playAgainButton);
+    const playAgainButton = document.createElement('button');
+    playAgainButton.setAttribute('type', 'button');
+    playAgainButton.setAttribute('class', 'button');
+    playAgainButton.textContent = 'Play Again?';
+    body.appendChild(playAgainButton);
+
+    const reset = document.createElement('button');
+    reset.setAttribute('type', 'button');
+    reset.setAttribute('class', 'button');
+    reset.textContent = 'Reset?';
+    body.appendChild(reset);
     
 }
 
@@ -314,7 +326,7 @@ const playerClick = (e) => {
                                         // If there are still marbles left to place, loop through the top pits of the board again and place a marble until valueChange===0
                                         if(valueChange>=1 && j===13){
                                             for(let k = 6; k>=0; k--){
-// ###################################################################################### WORK ON THIS BELOW ##################################### 
+// ###################################################################################### PLAYER 1 CAPTURE OPPOSING PLAYER MARBLES IF LAND IN EMPTY BIN ON PLAYER 1 SIDE ##################################### 
                                                 if(k<=6 && state.board[k].value === 0 && state.board[k+6].value>=1){
                                                     state.board[k].value=0
                                                     allPlayerBoxes[k-1].innerText=state.board[k].value
