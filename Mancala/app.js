@@ -19,12 +19,12 @@ function buildInitialState(){
     
     state.board = [
         {index:0, value:0, name:'Player One Store'},
-        {index:1, value:1, name:'Player One Pit'}, 
-        {index:2, value:0, name:'Player One Pit'},
-        {index:3, value:0, name:'Player One Pit'},
-        {index:4, value:0, name:'Player One Pit'},
-        {index:5, value:0, name:'Player One Pit'},
-        {index:6, value:0, name:'Player One Pit'},
+        {index:1, value:4, name:'Player One Pit'}, 
+        {index:2, value:4, name:'Player One Pit'},
+        {index:3, value:4, name:'Player One Pit'},
+        {index:4, value:4, name:'Player One Pit'},
+        {index:5, value:4, name:'Player One Pit'},
+        {index:6, value:4, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -196,10 +196,23 @@ const setPlayers =()=>{
     }
 }
 
+const endOfGameButtons = () => {
+    const playAgainButton = document.createElement('button');
+    playAgainButton.setAttribute('type', 'button');
+    playAgainButton.setAttribute('class', 'button');
+    playAgainButton.textContent = 'Play Again?';
+    body.appendChild(playAgainButton);
+
+    const reset = document.createElement('button');
+    reset.setAttribute('type', 'button');
+    reset.setAttribute('class', 'button');
+    reset.textContent = 'Reset?';
+    body.appendChild(reset);
+}
+
 const winConditions =() =>{
     const playerWinDisplay = document.querySelector(".player-turn")
     const playerScoreUpdate = document.querySelectorAll(".player-score")
-    console.log(playerScoreUpdate)
     plyrOneWin = 0;
     plyrTwoWin = 0;
     for(let i=1; i<=6; i++){
@@ -223,10 +236,12 @@ const winConditions =() =>{
             playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
             state.players[0].score += 1
             playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`
+            endOfGameButtons()
         }else{
             playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
             state.players[1].score += 1
             playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`
+            endOfGameButtons()
         }
     }
     if(plyrTwoWin===6){
@@ -240,26 +255,16 @@ const winConditions =() =>{
             playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
             state.players[1].score += 1
             playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`
+            endOfGameButtons()
         }else{
             playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
             state.players[0].score += 1
             playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`
+            endOfGameButtons()
         }
     }
 
 
-    const playAgainButton = document.createElement('button');
-    playAgainButton.setAttribute('type', 'button');
-    playAgainButton.setAttribute('class', 'button');
-    playAgainButton.textContent = 'Play Again?';
-    body.appendChild(playAgainButton);
-
-    const reset = document.createElement('button');
-    reset.setAttribute('type', 'button');
-    reset.setAttribute('class', 'button');
-    reset.textContent = 'Reset?';
-    body.appendChild(reset);
-    
 }
 
 const changePlayer1Turn = () =>{
@@ -437,7 +442,15 @@ const playerClick = (e) => {
     }
 }
 
+// const restartGame = () => {
+
+// }
+
+// const playAgainButton = document.querySelectorAll(".button")
+console.log(playAgainButton)
+
 startGame.addEventListener("click", setPlayers)
 mancalaBoard.addEventListener("click", playerClick)
 mancalaBoard.addEventListener("click", winConditions)
+// playAgainButton.addEventListener("click", restartGame)
 
