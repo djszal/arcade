@@ -19,12 +19,12 @@ function buildInitialState(){
     
     state.board = [
         {index:0, value:0, name:'Player One Store'},
-        {index:1, value:1, name:'Player One Pit'}, 
-        {index:2, value:0, name:'Player One Pit'},
-        {index:3, value:0, name:'Player One Pit'},
-        {index:4, value:0, name:'Player One Pit'},
-        {index:5, value:0, name:'Player One Pit'},
-        {index:6, value:0, name:'Player One Pit'},
+        {index:1, value:4, name:'Player One Pit'}, 
+        {index:2, value:4, name:'Player One Pit'},
+        {index:3, value:4, name:'Player One Pit'},
+        {index:4, value:4, name:'Player One Pit'},
+        {index:5, value:4, name:'Player One Pit'},
+        {index:6, value:4, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -456,13 +456,13 @@ const playerClick = (e) => {
 }
 
 const restartGame = () => {
-    buildInitialState();
+    mancalaBoard.remove();
     const endGameButtons = document.querySelectorAll(".button");
     console.log(mancalaBoard)
     endGameButtons[0].remove();
     endGameButtons[1].remove();
-    mancalaBoard.remove();
-    renderBoard();
+    buildInitialState();
+    setTimeout(renderBoard,3000);
     
 }
 
