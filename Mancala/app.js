@@ -1,7 +1,7 @@
 let state = {};
 
 //********************** DOM Selectors and Create Elements *****************************
-const body = document.body
+const body = document.body;
 
 const title = document.createElement('h1');
 title.setAttribute('class', 'title');
@@ -19,43 +19,46 @@ function buildInitialState(){
     
     state.board = [
         {index:0, value:0, name:'Player One Store'},
-        {index:1, value:4, name:'Player One Pit'}, 
-        {index:2, value:4, name:'Player One Pit'},
-        {index:3, value:4, name:'Player One Pit'},
-        {index:4, value:4, name:'Player One Pit'},
-        {index:5, value:4, name:'Player One Pit'},
-        {index:6, value:4, name:'Player One Pit'},
+        {index:1, value:1, name:'Player One Pit'}, 
+        {index:2, value:0, name:'Player One Pit'},
+        {index:3, value:0, name:'Player One Pit'},
+        {index:4, value:0, name:'Player One Pit'},
+        {index:5, value:0, name:'Player One Pit'},
+        {index:6, value:0, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
         {index:10, value:4, name:'Player Two Pit'},
         {index:11, value:4, name:'Player Two Pit'},
         {index:12, value:4, name:'Player Two Pit'}, 
-        {index:13, value:0, name:'Player Two Store'}]
+        {index:13, value:0, name:'Player Two Store'}];
 
-    state.stores = [state.board[0],state.board[13]]
-    state.players= [
-        {name: null, score: 0, isTurn: false},
-        {name: null, score: 0, isTurn: false}]
-    state.game=
-        {isGameStarted: false,
-        error: false
-        }
+    state.stores = [state.board[0],state.board[13]];
     
-
-    title.textContent = 'Mancala'
-    body.appendChild(title)
-
-
+    
     
 }
 
+function dynamicState() {
+    state.players= [
+        {name: null, score: 0, isTurn: false},
+        {name: null, score: 0, isTurn: false}];
+
+    state.game=
+        {isGameStarted: false,
+        error: false
+        };
+}
+
+
 function renderPlayerBox(){
+    title.textContent = 'Mancala';
+    body.appendChild(title);
     playerBox.setAttribute("class", "player-box"); 
-    body.appendChild(playerBox)
+    body.appendChild(playerBox);
     
     scoreBox.setAttribute("class", "score-box"); 
-    body.appendChild(scoreBox)
+    body.appendChild(scoreBox);
 
     const playerOne = document.createElement('h3');
     playerOne.setAttribute('class', 'players');
@@ -91,38 +94,39 @@ function renderPlayerBox(){
 }
 
 function renderBoard(){
-    body.appendChild(boardBox)
+    body.appendChild(boardBox);
 
-    const endCapOne = document.createElement('div')
+    const endCapOne = document.createElement('div');
     endCapOne.setAttribute('class', 'endCaps');
-    endCapOne.innerText = state.stores[0].value
-    endCapOne.value = 0
-    boardBox.appendChild(endCapOne)
+    endCapOne.innerText = state.stores[0].value;
+    endCapOne.value = 0;
+    boardBox.appendChild(endCapOne);
     
-    const boxesBox = document.createElement('div')
+    const boxesBox = document.createElement('div');
     boxesBox.setAttribute('class', 'boxes-box');
-    boardBox.appendChild(boxesBox)
+    boardBox.appendChild(boxesBox);
 
     let k = 1
     for (let i=1; i<state.board.length-1; i++){
         
-        const box = document.createElement('div')
+        const box = document.createElement('div');
         box.setAttribute('class', 'box');
-        box.idx = k
-        k++
-        box.innerText= state.board[i].value
-        boxesBox.appendChild(box)
+        box.idx = k;
+        k++;
+        box.innerText= state.board[i].value;
+        boxesBox.appendChild(box);
 }
     const endCapTwo = document.createElement('div')
     endCapTwo.setAttribute('class', 'endCaps');
-    endCapTwo.innerText = state.stores[1].value
-    endCapOne.value = 13
-    boardBox.appendChild(endCapTwo)
+    endCapTwo.innerText = state.stores[1].value;
+    endCapOne.value = 13;
+    boardBox.appendChild(endCapTwo);
 }
 
-buildInitialState()
-renderPlayerBox()
-renderBoard()
+buildInitialState();
+dynamicState();
+renderPlayerBox();
+renderBoard();
 
 const mancalaBoard = document.querySelector(".board-box")
 const startGame = document.querySelector(".button")
@@ -210,6 +214,8 @@ const endOfGameButtons = () => {
     body.appendChild(reset);
 }
 
+
+
 const winConditions =() =>{
     const playerWinDisplay = document.querySelector(".player-turn")
     const playerScoreUpdate = document.querySelectorAll(".player-score")
@@ -226,45 +232,52 @@ const winConditions =() =>{
         }
     }
     if(plyrOneWin===6){
-        let plyrOneScore = state.board[0].value
-        let plyrTwoScore = state.board[13].value
-        for(let i=7; i<=12; i++){
-            plyrTwoScore += state.board[i].value
-            }
         state.game.isGameStarted=false;
+        let plyrOneScore = state.board[0].value;
+        let plyrTwoScore = state.board[13].value;
+        for(let i=7; i<=12; i++){
+            plyrTwoScore += state.board[i].value;
+            }
         if(plyrOneScore>plyrTwoScore){
-            playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
-            state.players[0].score += 1
-            playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`
-            endOfGameButtons()
+            playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`;
+            state.players[0].score += 1;
+            playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`;
+            endOfGameButtons();
         }else{
-            playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
-            state.players[1].score += 1
-            playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`
-            endOfGameButtons()
+            playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`;
+            state.players[1].score += 1;
+            playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`;
+            endOfGameButtons();
+            const playAgainButton = document.querySelectorAll(".button")
+            console.log(playAgainButton[0])
+            playAgainButton[0].addEventListener("click", restartGame)
+            
+
         }
     }
     if(plyrTwoWin===6){
-        let plyrTwoScore = state.board[13].value
-        let plyrOneScore = state.board[0].value
+        state.game.isGameStarted=false;
+        let plyrTwoScore = state.board[13].value;
+        let plyrOneScore = state.board[0].value;
         for(let i=1; i<=6; i++){
-            plyrOneScore += state.board[i].value
+            plyrOneScore += state.board[i].value;
             }
-        state.game.isGameStarted=false
         if(plyrTwoScore>plyrOneScore){
-            playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`
-            state.players[1].score += 1
-            playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`
-            endOfGameButtons()
+            playerWinDisplay.innerText=`${state.players[1].name} Wins!! ${state.players[1].name} Points: ${plyrTwoScore} || ${state.players[0].name} Points: ${plyrOneScore}`;
+            state.players[1].score += 1;
+            playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`;
+            endOfGameButtons();
+            
+
         }else{
-            playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`
-            state.players[0].score += 1
-            playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`
-            endOfGameButtons()
+            playerWinDisplay.innerText=`${state.players[0].name} Wins!! ${state.players[0].name} Points: ${plyrOneScore} || ${state.players[1].name} Points: ${plyrTwoScore}`;
+            state.players[0].score += 1;
+            playerScoreUpdate[0].innerText = `\u00A0${state.players[0].score}`;
+            endOfGameButtons();
+            
+
         }
     }
-
-
 }
 
 const changePlayer1Turn = () =>{
@@ -442,15 +455,21 @@ const playerClick = (e) => {
     }
 }
 
-// const restartGame = () => {
+const restartGame = () => {
+    buildInitialState();
+    const endGameButtons = document.querySelectorAll(".button");
+    console.log(mancalaBoard)
+    endGameButtons[0].remove();
+    endGameButtons[1].remove();
+    mancalaBoard.remove();
+    renderBoard();
+    
+}
 
-// }
-
-// const playAgainButton = document.querySelectorAll(".button")
-console.log(playAgainButton)
 
 startGame.addEventListener("click", setPlayers)
 mancalaBoard.addEventListener("click", playerClick)
 mancalaBoard.addEventListener("click", winConditions)
-// playAgainButton.addEventListener("click", restartGame)
+
+
 
