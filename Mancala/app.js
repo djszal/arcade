@@ -462,7 +462,7 @@ const restartGame = () => {
     endGameButtons[0].remove();
     endGameButtons[1].remove();
     buildInitialState();
-    setTimeout(renderBoard,3000);
+    renderBoard();
     
 }
 
