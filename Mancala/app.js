@@ -19,12 +19,12 @@ function buildInitialState(){
     
     state.board = [
         {index:0, value:0, name:'Player One Store'},
-        {index:1, value:4, name:'Player One Pit'}, 
-        {index:2, value:4, name:'Player One Pit'},
-        {index:3, value:4, name:'Player One Pit'},
-        {index:4, value:4, name:'Player One Pit'},
-        {index:5, value:4, name:'Player One Pit'},
-        {index:6, value:4, name:'Player One Pit'},
+        {index:1, value:1, name:'Player One Pit'}, 
+        {index:2, value:0, name:'Player One Pit'},
+        {index:3, value:0, name:'Player One Pit'},
+        {index:4, value:0, name:'Player One Pit'},
+        {index:5, value:0, name:'Player One Pit'},
+        {index:6, value:0, name:'Player One Pit'},
         {index:7, value:4, name:'Player Two Pit'},
         {index:8, value:4, name:'Player Two Pit'},
         {index:9, value:4, name:'Player Two Pit'},
@@ -201,17 +201,21 @@ const setPlayers =()=>{
 }
 
 const endOfGameButtons = () => {
+    const playAgainButtonContainer = document.createElement('div');
+    playAgainButtonContainer.setAttribute('class', 'end-game-buttons');
+    body.appendChild(playAgainButtonContainer);
+
     const playAgainButton = document.createElement('button');
     playAgainButton.setAttribute('type', 'button');
     playAgainButton.setAttribute('class', 'button');
     playAgainButton.textContent = 'Play Again?';
-    body.appendChild(playAgainButton);
+    playAgainButtonContainer.appendChild(playAgainButton);
 
     const reset = document.createElement('button');
     reset.setAttribute('type', 'button');
     reset.setAttribute('class', 'button');
     reset.textContent = 'Reset?';
-    body.appendChild(reset);
+    playAgainButtonContainer.appendChild(reset);
 }
 
 
@@ -249,7 +253,6 @@ const winConditions =() =>{
             playerScoreUpdate[1].innerText = `\u00A0${state.players[1].score}`;
             endOfGameButtons();
             const playAgainButton = document.querySelectorAll(".button")
-            console.log(playAgainButton[0])
             playAgainButton[0].addEventListener("click", restartGame)
             
 
@@ -456,13 +459,16 @@ const playerClick = (e) => {
 }
 
 const restartGame = () => {
-    mancalaBoard.remove();
     const endGameButtons = document.querySelectorAll(".button");
     console.log(mancalaBoard)
+    console.log(state.board)
     endGameButtons[0].remove();
     endGameButtons[1].remove();
     buildInitialState();
-    renderBoard();
+    console.log(state.board)
+    mancalaBoard.remove();
+    // renderBoard();
+    console.log(mancalaBoard)
     
 }
 

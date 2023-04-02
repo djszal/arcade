@@ -39,6 +39,12 @@ margin-top: 50px;
     border: solid black;
 }
 
+.end-game-buttons{
+    display: flex; 
+    justify-content: center;
+
+}
+
 .box{
     border: red dashed;
     text-align: center;
