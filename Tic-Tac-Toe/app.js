@@ -71,272 +71,288 @@ function placeMarks(event) {
   }
 }
 
-function winner() {
-  if (
-    state.board[0] === "X" &&
-    state.board[1] === "X" &&
-    state.board[2] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0] += 1;
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[3] === "X" &&
-    state.board[4] === "X" &&
-    state.board[5] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[6] === "X" &&
-    state.board[7] === "X" &&
-    state.board[8] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+// function winner() {
+//   if (
+//     state.board[0] === "X" &&
+//     state.board[1] === "X" &&
+//     state.board[2] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0] += 1;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[3] === "X" &&
+//     state.board[4] === "X" &&
+//     state.board[5] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[6] === "X" &&
+//     state.board[7] === "X" &&
+//     state.board[8] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[0] === "X" &&
-    state.board[3] === "X" &&
-    state.board[6] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[0] === "X" &&
+//     state.board[3] === "X" &&
+//     state.board[6] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[1] === "X" &&
-    state.board[4] === "X" &&
-    state.board[7] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[1] === "X" &&
+//     state.board[4] === "X" &&
+//     state.board[7] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[2] === "X" &&
-    state.board[5] === "X" &&
-    state.board[8] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[2] === "X" &&
+//     state.board[5] === "X" &&
+//     state.board[8] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
      
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[0] === "X" &&
-    state.board[4] === "X" &&
-    state.board[8] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[0] === "X" &&
+//     state.board[4] === "X" &&
+//     state.board[8] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
      
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[2] === "X" &&
-    state.board[4] === "X" &&
-    state.board[6] === "X"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[2] === "X" &&
+//     state.board[4] === "X" &&
+//     state.board[6] === "X"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[0] === "O" &&
-    state.board[1] === "O" &&
-    state.board[2] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[0] === "O" &&
+//     state.board[1] === "O" &&
+//     state.board[2] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
      
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
      
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[3] === "O" &&
-    state.board[4] === "O" &&
-    state.board[5] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[3] === "O" &&
+//     state.board[4] === "O" &&
+//     state.board[5] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
      
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[6] === "O" &&
-    state.board[7] === "O" &&
-    state.board[8] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[6] === "O" &&
+//     state.board[7] === "O" &&
+//     state.board[8] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
      
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
      
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[0] === "O" &&
-    state.board[3] === "O" &&
-    state.board[6] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[0] === "O" &&
+//     state.board[3] === "O" &&
+//     state.board[6] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[1] === "O" &&
-    state.board[4] === "O" &&
-    state.board[7] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[1] === "O" &&
+//     state.board[4] === "O" &&
+//     state.board[7] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[2] === "O" &&
-    state.board[5] === "O" &&
-    state.board[8] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[2] === "O" &&
+//     state.board[5] === "O" &&
+//     state.board[8] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
       
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[0] === "O" &&
-    state.board[4] === "O" &&
-    state.board[8] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[0] === "O" &&
+//     state.board[4] === "O" &&
+//     state.board[8] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
      
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    state.board[2] === "O" &&
-    state.board[4] === "O" &&
-    state.board[6] === "O"
-  ) {
-    if (randomNumber % 2 === 0) {
-      playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
-      state.score[1]++;
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     state.board[2] === "O" &&
+//     state.board[4] === "O" &&
+//     state.board[6] === "O"
+//   ) {
+//     if (randomNumber % 2 === 0) {
+//       playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+//       state.score[1]++;
      
-    } else {
-      playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
-      state.score[0]++;
+//     } else {
+//       playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+//       state.score[0]++;
       
-    }
-    state.gameOver=true;
-    resetButton();
-  } else if (
-    count === 9 &&
-    playersBoxElem.innerHTML !== `${state.players[1]} Wins!!` &&
-    playersBoxElem.innerHTML !== `${state.players[0]} Wins!!`
-  ) {
-    playersBoxElem.innerHTML = `DRAW!!`;
-    resetButton();
-    state.gameOver=true;
-  }
-}
+//     }
+//     state.gameOver=true;
+//     resetButton();
+//   } else if (
+//     count === 9 &&
+//     playersBoxElem.innerHTML !== `${state.players[1]} Wins!!` &&
+//     playersBoxElem.innerHTML !== `${state.players[0]} Wins!!`
+//   ) {
+//     playersBoxElem.innerHTML = `DRAW!!`;
+//     resetButton();
+//     state.gameOver=true;
+//   }
+// }
 
 function handleWin(){
-  
+  const winArrCombo = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  for(let i=0; i<winArrCombo.length; i++){
+    console.log(i)
+    const [a,b,c] = winArrCombo[i];
+    if (state.board[a] !== "" && state.board[a] === state.board[b] && state.board[b] === state.board[c]){
+      if (randomNumber % 2 === 0) {
+        playersBoxElem.innerHTML = `${state.players[0]} Wins!!`;
+        state.score[0]++;
+      } else {
+        playersBoxElem.innerHTML = `${state.players[1]} Wins!!`;
+        state.score[1]++;
+      }
+      state.gameOver=true;
+      resetButton();
+    }
+
+  }
 }
 
 function alertStart(){
@@ -401,7 +417,7 @@ boardElem.addEventListener("click", (event) => {
     if(state.gameOver===true){
       return
     }
-    winner();
+    handleWin();
   }
 });
 
